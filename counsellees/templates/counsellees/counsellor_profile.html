@@ -11,17 +11,28 @@
 			<img class= "rounded-circle account-img" src="{{ counsellor.user.profile.image.url }}">
 			<div class="media-body">
 				<h3 class="account-heading">{{ counsellor.user.first_name }} {{ counsellor.user.last_name }}</h3>
-				<p class="text-secondary">{{ counsellor.user.email }}</p>
+				<p class="text-secondary">{{ counsellor.quote }}</p>
 				<a class= "btn btn-outline-info btn-sm" href="">Message</a>
 				<a class= "btn btn-info btn-sm" href="">Book Appointment</a>
 			</div>
 		</div>
-		<br>
-		<h4 class=""></h4>
-		<h5 class="">Contact Phone: {{ counsellor.phone_number }}</h5>
-		<h5 class="">Contact Phone: {{ counsellor.phone_number }}</h5>
-		<h5 class="">Contact Phone: {{ counsellor.phone_number }}</h5>
-		<h5 class="">Contact Phone: {{ counsellor.phone_number }}</h5>
+		<h4 class="pb-2"><br></h4>
+		<h4 class="">Contact Info</h4>
+		<hr>
+		<h6 class="text-muted">Phone Number:<br></h6>
+		<h6 class="pb-3">{{ counsellor.phone_number }}</h6>
+		<h6 class="text-muted">Email Address:<br></h6>
+		<h6 class="pb-3">{{ counsellor.user.email }}</h6>
+		<h6 class="text-muted">Website: <br></h6>
+		<h6 class="pb-3">{{ counsellor.website }}</h6>
+		<h6 class="text-muted">Office Address:<br></h6>
+		<h6 class="pb-4">{{ counsellor.address }}</h6>
+		<h4 class="">Bio</h4>
+		<hr>
+		<h6 class="text-muted">Education and Qualifications: <br></h6>
+		<h6 class="pb-3">{{ counsellor.qualification }}</h6>
+		<h6 class="text-muted">Short Bio:</h6>
+		<h6>{{ counsellor.bio }}</h6>
 	</div>
 	
 {% endblock content %}
