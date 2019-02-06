@@ -1,0 +1,27 @@
+{% extends 'counsellia/counsellee_base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+	
+	<div class="content-section">
+		<br>
+		<legend class="border-bottom mb-4">
+			<h4>Profile</h4>
+		</legend>
+		<div class="media">
+			<img class= "rounded-circle account-img" src="{{ counsellor.user.profile.image.url }}">
+			<div class="media-body">
+				<h3 class="account-heading">{{ counsellor.user.first_name }} {{ counsellor.user.last_name }}</h3>
+				<p class="text-secondary">{{ counsellor.user.email }}</p>
+				<a class= "btn btn-outline-info btn-sm" href="">Message</a>
+				<a class= "btn btn-info btn-sm" href="">Book Appointment</a>
+			</div>
+		</div>
+		<br>
+		<h4 class=""></h4>
+		<h5 class="">Contact Phone: {{ counsellor.phone_number }}</h5>
+		<h5 class="">Contact Phone: {{ counsellor.phone_number }}</h5>
+		<h5 class="">Contact Phone: {{ counsellor.phone_number }}</h5>
+		<h5 class="">Contact Phone: {{ counsellor.phone_number }}</h5>
+	</div>
+	
+{% endblock content %}

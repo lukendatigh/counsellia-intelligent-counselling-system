@@ -1,0 +1,12 @@
+{% extends 'counsellia/counsellee_base.html' %}
+{% block content %}
+	
+	{% if appointments %}
+	{% for appointment in appointments %}
+	<article>
+		<h2>{{ appointment.title }}</h2>
+	</article>
+	{% endfor %}
+	{% endif %}
+	
+{% endblock %}

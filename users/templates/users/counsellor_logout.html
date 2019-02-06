@@ -1,0 +1,13 @@
+{% extends "counsellia/counsellor_base.html" %}
+
+{% block content %}
+	<div class="content-section">
+		<h2>You have been logged out</h2>
+		<div class="border-top pt-3">
+			<small class="text-muted"><a href="{% url 'counsellor-login' %}">Log In Again</a></small><br>
+			<small class="text-muted">
+				Need an account? <a class="ml-2" href="{% url 'counsellor-register' %}">Sign Up</a>
+			</small>
+		</div>
+	</div>
+{% endblock content %}
