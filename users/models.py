@@ -36,6 +36,7 @@ class Counsellee(Profile):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name = 'counsellee', null=True)
 
 class Counsellor(Profile):
-	website = models.CharField(max_length=200, null=True, blank = True)
+	quote = models.CharField(max_length=300, null=True, blank=True)
+	website = models.CharField(max_length=300, null=True, blank = True)
 	qualification = models.CharField('education and qualifications', max_length=300, null=True, blank=True)
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name = 'counsellor', null=True)
