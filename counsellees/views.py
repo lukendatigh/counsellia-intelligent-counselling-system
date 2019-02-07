@@ -4,8 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
 from users.views import ( User, Counsellor, Counsellee )
-from . forms import ( UserUpdateForm, ProfileUpdateForm )
-from counsellia.models import ( Appointment )
+from counsellees.forms import ( UserUpdateForm, ProfileUpdateForm )
+from counsellia.models import ( Appointment,Conversation )
 from django.views.generic import (
 	ListView, 
 	DetailView,
@@ -49,7 +49,7 @@ class AppointmentDeleteView(DeleteView):
 
 class AppointmentCounsellorProfileView(DetailView):
 	model = Counsellor
-	template_name = 'counsellees/appointment_counsellor_profile.html'
+	template_name = 'counsellees/counsellor_profile.html'
 	context_object_name = 'counsellor'
 
 
@@ -71,6 +71,12 @@ class CounselleeProfileView(DetailView):
 	model = Counsellee
 	template_name = 'counsellees/counsellee_profile_view.html'
 	context_object_name = 'counsellee'
+
+class CounselleeMessages(ListView):
+	model = Conversation
+
+# class CounselleeConversation():
+
 
 
 @login_required
