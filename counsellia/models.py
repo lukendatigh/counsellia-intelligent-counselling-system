@@ -17,6 +17,14 @@ class Appointment(models.Model):
 		return title
 
 
+class Conversation(models.Model):
+	counsellee = models.ForeignKey(Counsellee, on_delete=models.CASCADE, null=True)
+	counsellor = models.ForeignKey(Counsellor, on_delete=models.CASCADE, null=True)
+	requested = models.BooleanField(default=True, null=False)
+	ongoing = models.BooleanField(default=False, null=True)
+	archive = models.BooleanField(default=False, null=False)
+
+
 # class Report(models.Model):
 #	counsellee = models.ForeignKey(Counsellee, on_delete=models.CASCADE, null=True)
 #	counsellor = models.ForeignKey(Counsellor, on_delete=models.CASCADE, null=True)
