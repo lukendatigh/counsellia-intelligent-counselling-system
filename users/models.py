@@ -34,9 +34,11 @@ class Profile(models.Model):
 class Counsellee(Profile):
 	interests = models.TextField(null=True, blank = True)
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name = 'counsellee', null=True)
+	active = models.BooleanField(default=True, null=True)
 
 class Counsellor(Profile):
 	quote = models.CharField(max_length=300, null=True, blank=True)
 	website = models.CharField(max_length=300, null=True, blank = True)
 	qualification = models.CharField('education and qualifications', max_length=300, null=True, blank=True)
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name = 'counsellor', null=True)
+	available = models.BooleanField(default=True, null=True)
