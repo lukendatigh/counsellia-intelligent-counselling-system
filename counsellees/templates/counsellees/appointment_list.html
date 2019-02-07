@@ -1,12 +1,27 @@
 {% extends 'counsellia/counsellee_base.html' %}
-{% block content %}
-	
-	{% if appointments %}
-	{% for appointment in appointments %}
-	<article>
-		<h2>{{ appointment.title }}</h2>
-	</article>
-	{% endfor %}
-	{% endif %}
-	
+{% block content%}
+	<div class="row">
+		<div class="col-8">
+			<h1>Appointments</h1>
+			<hr>
+			{% if appointments %}
+				{% for appointment in appointments %}
+					{% if appointment.counsellee.user is authenticated %}
+						<div class="content-section">
+							<article>
+								<h2>{{ appointment.title }}</h2>
+							</article>
+						</div>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</div>
+		<div class="col-4">
+			<div class="content-section">
+				<h3 class="pt-2">Notifications</h3>
+				<hr>
+				<h6>New Messages <a href="" class="badge badge-pill badge-primary">None</a></h6>
+			</div>
+		</div>
+	</div>
 {% endblock %}
