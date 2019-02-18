@@ -32,8 +32,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
+    # 'chat.apps.ChatConfig',
     'counsellia.apps.CounselliaConfig',
     'counsellees.apps.CounselleesConfig',
+    'counsellors.apps.CounsellorsConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'select2',
 ]
 
 MIDDLEWARE = [
