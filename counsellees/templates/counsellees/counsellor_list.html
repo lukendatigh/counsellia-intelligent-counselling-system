@@ -1,8 +1,9 @@
 {% extends 'counsellia/counsellee_subbase.html' %}
 {% block subcontent %}
 	<h1>Available Counsellors</h1>
-	<hr class="mb-5">
-	<p class="mb-5"><b></b></p>
+	<h6 class="text-muted">a curated list of counsellors based on your needs</h6>
+	<hr>
+	<p class="mb-3"></p>
 	{% for counsellor in counsellors %}
 		{% if counsellor.available is True %}
 			<article class="media content-section">
