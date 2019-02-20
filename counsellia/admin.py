@@ -5,4 +5,3 @@ from users.models import Category
 # Register your models here.
 admin.site.register(Appointment)
 admin.site.register(Report)
-admin.site.register(Category)
