@@ -1,6 +1,6 @@
-{% extends 'counsellia/counsellee_base.html' %}
+{% extends 'counsellia/counsellee_subbase.html' %}
 {% load crispy_forms_tags %}
-{% block content %}
+{% block subcontent %}
 	
 	<div class="content-section">
 		<br>
@@ -17,6 +17,8 @@
 			</div>
 		</div>
 		<h4 class="pb-2"><br></h4>
+		
+		<hr>
 		<h4 class="">Contact Info</h4>
 		<hr>
 		<h6 class="text-muted">Phone Number:<br></h6>
@@ -27,6 +29,7 @@
 		<h6 class="pb-3">{{ counsellor.website }}</h6>
 		<h6 class="text-muted">Office Address:<br></h6>
 		<h6 class="pb-4">{{ counsellor.address }}</h6>
+		<hr>
 		<h4 class="">Bio</h4>
 		<hr>
 		<h6 class="text-muted">Education and Qualifications: <br></h6>
@@ -35,4 +38,4 @@
 		<h6>{{ counsellor.bio }}</h6>
 	</div>
 	
-{% endblock content %}
+{% endblock %}

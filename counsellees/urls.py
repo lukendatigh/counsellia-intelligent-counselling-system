@@ -1,15 +1,12 @@
 from django.urls import path, include
-from django.contrib.auth import views as auth_views
 
 from . import views as counsellee_views
-
 from . views import (
 	AppointmentListView,
 	AppointmentDetailView,
 	AppointmentCreateView,
 	AppointmentUpdateView,
 	AppointmentDeleteView,
-	AppointmentCounsellorProfileView,
 	CounsellorListView,
 	CounsellorProfileView
 	)
@@ -32,9 +29,6 @@ urlpatterns = [
 	path('appointment/<int:pk>/delete/', 
 		AppointmentDeleteView.as_view(),
 		name = 'counsellee-appointment-delete'),
-	path('appointment/<int:pk>/counsellor/', 
-		AppointmentCounsellorProfileView.as_view(),
-		name = 'appointment-counsellor'),
 
 	path('counsellors/', CounsellorListView.as_view(),
 		name = 'available-counsellors'),

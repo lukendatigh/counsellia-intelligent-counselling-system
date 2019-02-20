@@ -6,18 +6,19 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
 	path('', users_views.index, name = 'index-page'),
 	path('counsellee/', include('counsellees.urls')),
-#	path('counsellor/', include('counsellors.urls')),
+	path('counsellor/', include('counsellors.urls')),
 
 	# Login view
 	path('counsellee-login/', auth_views.LoginView.as_view(template_name = 'users/counsellee_login.html'), 
 		name = 'counsellee-login'),
-
-	path('counsellee-register/', users_views.counsellee_register, name='counsellee-register'),
+	path('counsellee-register/', users_views.counsellee_register, 
+		name='counsellee-register'),
 
 
 	path('counsellor-login/', auth_views.LoginView.as_view(template_name = 'users/counsellor_login.html'), 
 			name = 'counsellor-login'),
-	path('counsellor-register/', users_views.counsellor_register, name='counsellor-register'),
+	path('counsellor-register/', users_views.counsellor_register, 
+		name='counsellor-register'),
 
 	path('counsellee-logout/', auth_views.LogoutView.as_view(template_name = 'users/counsellee_logout.html'), 
 		name = 'counsellee-logout'),

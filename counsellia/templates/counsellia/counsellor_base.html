@@ -21,16 +21,18 @@
 					<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarToggle">
-						{% if user.is_authenticated %}
+						{% if user.is_authenticated is True %}
 							<div class="navbar-nav mr-auto">
 								<!-- <a class="nav-item nav-link" href="">Home</a> -->
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="appointmentDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Schedule
+										My Schedule
 									</a>
 									<div class="dropdown-menu" aria-labelledby="appointmentDropdownMenuLink">
-										<a class="dropdown-item" href="#">View Appointments</a>
 										<a class="dropdown-item" href="#">New Appointment</a>
+										<a class="dropdown-item" href="#">View Appointments</a>
+										<a class="dropdown-item" href="#">Archived Appointments</a>
+
 									</div>
 								</li>
 								<li class="nav-item dropdown">
@@ -38,22 +40,23 @@
 										Reports
 									</a>
 									<div class="dropdown-menu" aria-labelledby="reportDropdownMenuLink">
-										<a class="dropdown-item" href="#">View Reports</a>
 										<a class="dropdown-item" href="#">New Report</a>
+										<a class="dropdown-item" href="#">View Reports</a>
+										<a class="dropdown-item" href="">Archived Reports</a>
 									</div>
 								</li>
 							</div>
-						{% else %}
+						{% elif user.is_authenticated is False %}
 							<div class="navbar-nav mr-auto">
 							</div>
 						{% endif %}
 						<div class="navbar-nav">
 							<!---Navbar Right Side--->
-							{% if user.is_authenticated %}
+							{% if user.is_authenticated is True %}
 								<a class="nav-item nav-link" href="">Messages</a>
-								<a class="nav-item nav-link" href="">Profile</a>
+								<a class="nav-item nav-link" href="{% url 'counsellor-profile' %}">Profile</a>
 								<a class="nav-item nav-link" href="{% url 'counsellor-logout' %}">Logout</a>
-							{% else %}
+							{% elif user.is_authenticated is False %}
 								<a class="nav-item nav-link" href="{% url 'index-page' %}">go back</a>
 							{% endif %}
 						</div>
@@ -62,15 +65,8 @@
 			</nav>
 		</header>
 		<main role="main" class="container">
-			{% if messages %}
-				{% for message in messages %}
-					<div class="alert alert-{{ message.tags }}">
-						{{ message }}
-					</div>
-				{% endfor %}
-			{% endif %}
-			{% block content %}
-			{% endblock %}
+			{% block maincontent %}
+			{% endblock maincontent %}
 			
 		</main>
 		<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>

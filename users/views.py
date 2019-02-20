@@ -50,9 +50,3 @@ def counsellor_register(request):
 		form = CounsellorRegisterForm()
 	context = {'title': 'Counsellor Signup', 'form': form}
 	return render(request, 'users/counsellor_register.html', context)
-
-
-
-
-
-

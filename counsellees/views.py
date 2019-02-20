@@ -3,9 +3,6 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
-from users.views import ( User, Counsellor, Counsellee )
-from counsellees.forms import ( UserUpdateForm, ProfileUpdateForm )
-from counsellia.models import ( Appointment,Conversation )
 from django.views.generic import (
 	ListView, 
 	DetailView,
@@ -14,8 +11,12 @@ from django.views.generic import (
 	DeleteView
 	)
 
+from users.models import ( User, Counsellor, Counsellee )
+from counsellia.models import (Appointment, Report)
+from .forms import ( UserUpdateForm, ProfileUpdateForm )
 
-# Create your views here.
+
+
 class AppointmentListView(ListView):
 	model = Appointment
 	template_name = 'counsellees/appointment_list.html'
@@ -26,6 +27,7 @@ class AppointmentListView(ListView):
 
 class AppointmentDetailView(DetailView):
 	model = Appointment
+	context_object_name = 'appointments'
 	template_name = 'counsellees/appointment_detail.html'
 
 
@@ -46,13 +48,6 @@ class AppointmentDeleteView(DeleteView):
 	template_name = 'counsellees/appointment_delete.html'
 	context_object_name = 'appointment'
 
-
-class AppointmentCounsellorProfileView(DetailView):
-	model = Counsellor
-	template_name = 'counsellees/counsellor_profile.html'
-	context_object_name = 'counsellor'
-
-
 class CounsellorListView(ListView):
 	model = Counsellor
 	template_name = 'counsellees/counsellor_list.html'
@@ -72,8 +67,8 @@ class CounselleeProfileView(DetailView):
 	template_name = 'counsellees/counsellee_profile_view.html'
 	context_object_name = 'counsellee'
 
-class CounselleeMessages(ListView):
-	model = Conversation
+# class CounselleeMessages(ListView):
+# 	model = Conversation
 
 # class CounselleeConversation():
 
@@ -87,7 +82,7 @@ def profile_update(request):
 		if u_form.is_valid() and p_form.is_valid():
 			u_form.save()
 			p_form.save()
-			messages.success(request, f'Your profile details have been updated successfully!')
+			messages.success(request, f'Your profile has been updated!')
 			return redirect('counsellee-home')
 	else:
 		u_form = UserUpdateForm(instance = request.user)

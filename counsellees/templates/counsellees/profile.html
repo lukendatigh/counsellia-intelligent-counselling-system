@@ -1,32 +1,36 @@
 {% extends 'counsellia/counsellee_base.html' %}
 {% load crispy_forms_tags %}
-{% block content %}
-	
-	<div class="content-section">
-		<br>
-		<div class="media">
-			<img class= "rounded-circle account-img" src="{{ user.profile.image.url }}">
-			<div class="media-body">
-				<br>
-				<h2 class="account-heading">{{ user.first_name }} {{ user.last_name }}</h2>
-				<p class="text-secondary">{{ user.email }}</p>
-			</div>
+{% block maincontent %}
+<div class="content-section">
+	<br>
+	<div class="media">
+		<img class= "rounded-circle account-img" src="{{ user.counsellee.image.url }}">
+		<div class="media-body">
+			<br>
+			<h2 class="account-heading">{{ user.first_name }} {{ user.last_name }}</h2>
+			<p class="text-secondary">{{ user.email }}</p>
 		</div>
-		<br>
-		<form method="POST" enctype="multipart/form-data">
-			{% csrf_token %}
-			<fieldset class="form-group" enctype="multipart/form-data">
-				<legend class="border-bottom mb-4">
-					<h2>Profile Info</h2>
-				</legend>
-				{{ u_form | crispy}}
-				{{ p_form | crispy}}
-			</fieldset>
-			<div class="form-group">
-				<button class="btn btn-outline-info" type="submit">Update</button>
-			</div>
-		</form>
-
 	</div>
-	
-{% endblock content %}
+	<br>
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<fieldset class="form-group" enctype="multipart/form-data">
+			<legend class="border-bottom mb-4">
+				<h2>Profile Info</h2>
+			</legend>
+			<div class="row">
+				<div class="col">
+					{{ u_form | crispy}}
+				</div>
+				<div class="col">
+					{{ p_form | crispy}}
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-group">
+			<button class="btn btn-outline-info" type="submit">Update</button>
+		</div>
+	</form>
+</div>
+{{ form.media.js }}
+{% endblock %}

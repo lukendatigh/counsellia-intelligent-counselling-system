@@ -18,7 +18,7 @@
 				<div class="container">
 					{% if user.is_authenticated is True %}
 						<a class="navbar-brand mr-4" href="{% url 'counsellee-home' %}">Counsellia</a>
-					{% elif user.is_authenticated is False %}
+						{% elif user.is_authenticated is False %}
 						<a class="navbar-brand mr-4" href="{% url 'counsellee-login' %}">Counsellia</a>
 					{% endif %}
 					<button class="navbar-toggler" type="button" data-toggle="collapse">
@@ -27,21 +27,21 @@
 					<div class="collapse navbar-collapse" id="navbarToggle">
 						{% if user.is_authenticated is True %}
 							<div class="navbar-nav mr-auto">
-								<!-- <a class="nav-item nav-link" href="">Home</a>
-								
-								<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="" id="appointmentDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												Schedule
-										</a>
-										<div class="dropdown-menu" aria-labelledby="appointmentDropdownMenuLink">
-												<a class="dropdown-item" href="#">View Appointments</a>
-												<a class="dropdown-item" href="#">New Appointment</a>
-										</div>
-								</li> -->
+								<!-- <a class="nav-item nav-link" href="">Home</a>-->
 								<a class="nav-item nav-link" href="{% url 'counsellee-home' %}">My Schedule</a>
-								<a class="nav-item nav-link" href="{% url 'available-counsellors' %}">Find A Counsellor</a>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="" id="appointmentDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Appointments
+									</a>
+									<div class="dropdown-menu" aria-labelledby="appointmentDropdownMenuLink">
+										<a class="dropdown-item" href="#">New Appointment</a>
+										<a class="dropdown-item" href="{% url 'counsellee-home' %}">View Appointments</a>
+										<a class="dropdown-item" href="#">Archived Appointments</a>
+									</div>
+								</li>
+								<a class="nav-item nav-link" href="{% url 'available-counsellors' %}">Counsellors</a>
 							</div>
-						{% elif user.is_authenticated is False %}
+							{% elif user.is_authenticated is False %}
 							<div class="navbar-nav mr-auto">
 							</div>
 						{% endif %}
@@ -50,8 +50,8 @@
 							{% if user.is_authenticated is True %}
 								<a class="nav-item nav-link" href="">Messages</a>
 								<a class="nav-item nav-link" href="{% url 'counsellee-profile' %}">Profile</a>
-								<a class="nav-item nav-link btn-outline btn-sm" href="{% url 'counsellee-logout' %}">Logout</a>
-							{% elif user.is_authenticated is False %}
+								<a class="nav-item nav-link" href="{% url 'counsellee-logout' %}">Logout</a>
+								{% elif user.is_authenticated is False %}
 								<a class="nav-item nav-link" href="{% url 'index-page' %}">go back</a>
 							{% endif %}
 						</div>
@@ -60,16 +60,8 @@
 			</nav>
 		</header>
 		<main role="main" class="container">
-			{% if messages %}
-				{% for message in messages %}
-					<div class="alert alert-{{ message.tags }}">
-						{{ message }}
-					</div>
-				{% endfor %}
-			{% endif %}
-			{% block content %}
-			{% endblock %}
-			
+			{% block maincontent %}
+			{% endblock maincontent %}
 		</main>
 		<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/jquery-slim.min.js' %}"></script>
