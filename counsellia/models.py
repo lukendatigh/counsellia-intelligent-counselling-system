@@ -14,6 +14,7 @@ class Appointment(models.Model):
 	counsellor = models.ForeignKey(Counsellor, on_delete=models.CASCADE, null=True)
 	time = models.DateTimeField()
 	appointment_type = models.CharField(max_length=20, choices=TYPE, null=True)
+	requested = models.BooleanField(default=True, null=True)
 	fixed = models.BooleanField(default=False, null=True)
 	held = models.BooleanField(default=False, null=True)
 	remarks = models.TextField(null=True, blank=True)
