@@ -14,6 +14,7 @@ class Category(models.Model):
 	class Meta:
 		verbose_name = 'Category'
 		verbose_name_plural = 'Categories'
+		ordering = ['name',]
 
 
 class User(AbstractUser):
@@ -34,7 +35,7 @@ class Profile(models.Model):
 	address = models.CharField(max_length=200, null=True, blank = True)
 	phone_number = models.BigIntegerField('mobile number', null=True, blank=True)
 	bio = models.TextField('short bio', null=True, blank=True)
-	image = models.ImageField(default='default.png', upload_to='profile_photos', null=True)
+	image = models.ImageField(default='default.png', upload_to='profile_photos', null=True, blank=True)
 
 	class Meta:
 		abstract = True 
@@ -42,13 +43,15 @@ class Profile(models.Model):
 	def __str__(self):
 		return f"{self.user.first_name} {self.user.last_name}'s Profile"
 
-	def save(self):
-		super().save() # run save method of super class
-		img = Image.open(self.image.path) # open image that has been saved
-		if img.height > 300 or img.width > 400:
-			output_size = (300, 300)
-			img.thumbnail(output_size)
-			img.save(self.image.path)
+	if image:
+		def save(self):
+			super().save() # run save method of super class
+			img = Image.open(self.image.path) # open image that has been saved
+			if img.height > 300 or img.width > 400:
+				output_size = (300, 300)
+				img.thumbnail(output_size)
+				img.save(self.image.path)
+	else: pass
 
 
 class Counsellee(Profile):
@@ -58,18 +61,28 @@ class Counsellee(Profile):
 	twitter_handle = models.CharField(max_length=120, null=True) 
 	active = models.BooleanField(default=True, null=True)
 
+	class Meta:
+		ordering = ['user',]
+
 
 class Counsellor(Profile):
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name = 'counsellor', null=True)
 	counsellees = models.ManyToManyField(Counsellee, through='Counselling')
-	specialty = models.ManyToManyField(Category)
+	specialties = models.ManyToManyField(Category)
 	quote = models.CharField(max_length=300, null=True, blank=True)
 	website = models.CharField(max_length=300, null=True, blank = True)
 	qualification = models.CharField('education and qualifications', max_length=300, null=True, blank=True)
 	available = models.BooleanField(default=True, null=True)
+	
+	class Meta:
+		ordering = ['user',]
 
 
 class Counselling(models.Model):
 	counsellor = models.ForeignKey(Counsellor, on_delete=models.CASCADE, null=True)
 	counsellee = models.ForeignKey(Counsellee, on_delete=models.CASCADE, null=True)
 	date_contacted = models.DateField(default=timezone.now)
+
+	class Meta:
+		verbose_name = 'Connection'
+		verbose_name_plural = 'Connections'
