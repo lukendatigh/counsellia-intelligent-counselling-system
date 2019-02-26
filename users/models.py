@@ -71,7 +71,7 @@ class Counsellor(Profile):
 	specialties = models.ManyToManyField(Category)
 	quote = models.CharField(max_length=300, null=True, blank=True)
 	website = models.CharField(max_length=300, null=True, blank = True)
-	qualification = models.CharField('education and qualifications', max_length=300, null=True, blank=True)
+	qualification = models.TextField('education and qualifications', null=True, blank=True)
 	available = models.BooleanField(default=True, null=True)
 	
 	class Meta:
@@ -82,6 +82,9 @@ class Counselling(models.Model):
 	counsellor = models.ForeignKey(Counsellor, on_delete=models.CASCADE, null=True)
 	counsellee = models.ForeignKey(Counsellee, on_delete=models.CASCADE, null=True)
 	date_contacted = models.DateField(default=timezone.now)
+
+	def __str__(self):
+		return f'{self.counsellor.user.username} and {self.counsellee.user.username}'
 
 	class Meta:
 		verbose_name = 'Connection'

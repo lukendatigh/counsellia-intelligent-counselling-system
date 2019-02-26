@@ -9,13 +9,15 @@ from . views import (
 		AppointmentCreateView,
 		AppointmentUpdateView,
 		AppointmentDeleteView,
+		CounselleeListView,
 		CounselleeProfileView,
 	)
 
 urlpatterns = [
-
-	# home page(appointment list) and user's profile
-	path('', AppointmentListView.as_view(), name = 'counsellor-home'),
 	path('profile/', counsellor_views.profile_update, name = 'counsellor-profile'),
+	
+	path('counsellee/<int:pk>', CounselleeProfileView.as_view(), name = 'selected-counsellee-profile'),
+	path('', AppointmentListView.as_view(), name = 'counsellor-schedule'),	
+	path('counsellees', CounselleeListView.as_view(), name = 'counsellor-counsellee-list'),
 
 ]

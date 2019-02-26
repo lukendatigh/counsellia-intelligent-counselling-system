@@ -8,9 +8,9 @@
 		{% if counsellor.available is True %}
 			{% for category in user.counsellee.categories.all %}
 				{% if category in counsellor.specialties.all %}
-					<article class="media content-section">
-						<img class= "rounded-circle account-img" src="{{ counsellor.image.url }}">
-						<div class="media-body">
+					<article class="shadow-sm media content-section">
+						<img class= "mt-2 rounded-circle account-img" src="{{ counsellor.image.url }}">
+						<div class="mt-1 media-body">
 							<h2 class="mt-2"><a class="article-title" href="{% url 'selected-counsellor-profile' counsellor.id %}">{{ counsellor.user.first_name }} {{ counsellor.user.last_name }}</a></h2>
 							{% if counsellor.qualification %}
 								<h6>{{ counsellor.qualification }}</h6>
@@ -22,8 +22,8 @@
 							{% else %}
 								<p class="article-content">{{ counsellor.bio }}...</p>
 							{% endif %}
-							<a class= "btn btn-outline-info btn-sm" href="">Message</a>
-							<a class= "btn btn-info btn-sm" href="">Book Appointment</a>
+							<a class= "shadow-sm btn btn-outline-info btn-sm" href="">Message</a>
+							<a class= "shadow-sm btn btn-info btn-sm" href="">Book Appointment</a>
 						</div>
 					</article>
 				{% endif %}

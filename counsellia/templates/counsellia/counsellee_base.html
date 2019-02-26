@@ -14,10 +14,10 @@
 	</head>
 	<body>
 		<header class="site-header">
-			<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+			<nav class="border-bottom-0 border-secondary shadow navbar navbar-expand-md navbar-dark bg-steel fixed-top">
 				<div class="container">
 					{% if user.is_authenticated is True %}
-						<a class="navbar-brand mr-4" href="{% url 'counsellee-home' %}">Counsellia</a>
+						<a class="navbar-brand mr-4" href="{% url 'counsellee-appointment-list' %}">Counsellia</a>
 						{% elif user.is_authenticated is False %}
 						<a class="navbar-brand mr-4" href="{% url 'counsellee-login' %}">Counsellia</a>
 					{% endif %}
@@ -27,18 +27,18 @@
 					<div class="collapse navbar-collapse" id="navbarToggle">
 						{% if user.is_authenticated is True %}
 							<div class="navbar-nav mr-auto">
-								<!-- <a class="nav-item nav-link" href="">Home</a>-->
-								<a class="nav-item nav-link" href="{% url 'counsellee-home' %}">My Schedule</a>
+								<a class="nav-item nav-link" href="{% url 'counsellee-appointment-list' %}">Schedule</a>
+								<a class="nav-item nav-link" href="{% url 'available-counsellors' %}">Counsellors</a>
 								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="" id="appointmentDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<a class="nav-link" href="" id="appointmentDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										Appointments
 									</a>
 									<div class="dropdown-menu" aria-labelledby="appointmentDropdownMenuLink">
-										<a class="dropdown-item" href="{% url 'counsellee-home' %}">View Appointments</a>
-										<a class="dropdown-item" href="#">Archived Appointments</a>
+										<a class="dropdown-item" href="#">Pending</a>
+										<a class="dropdown-item" href="#">Held</a>
+										<a class="dropdown-item" href="#">Archived</a>
 									</div>
 								</li>
-								<a class="nav-item nav-link" href="{% url 'available-counsellors' %}">Counsellors</a>
 							</div>
 							{% elif user.is_authenticated is False %}
 							<div class="navbar-nav mr-auto">
@@ -47,7 +47,7 @@
 						<div class="navbar-nav">
 							<!---Navbar Right Side--->
 							{% if user.is_authenticated is True %}
-								<a class="nav-item nav-link" href="">Messages</a>
+								<a class="nav-item nav-link" href="">Chat</a>
 								<a class="nav-item nav-link" href="{% url 'counsellee-profile' %}">Profile</a>
 								<a class="nav-item nav-link" href="{% url 'counsellee-logout' %}">Logout</a>
 								{% elif user.is_authenticated is False %}

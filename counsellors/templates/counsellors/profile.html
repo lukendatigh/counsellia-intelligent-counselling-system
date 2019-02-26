@@ -1,6 +1,6 @@
-{% extends 'counsellia/counsellor_subbase.html' %}
+{% extends 'counsellia/counsellor_base.html' %}
 {% load crispy_forms_tags %}
-{% block subcontent %}
+{% block maincontent %}
 	<div class="content-section">
 		<br>
 		<div class="media">
@@ -18,12 +18,18 @@
 				<legend class="border-bottom mb-4">
 					<h2>Profile Info</h2>
 				</legend>
-				{{ u_form | crispy }}
-				{{ p_form | crispy }}
+				<div class="row">
+					<div class="col">
+						{{ u_form | crispy}}
+					</div>
+					<div class="col">
+						{{ p_form | crispy}}
+					</div>
+				</div>
 			</fieldset>
 			<div class="form-group">
 				<button class="btn btn-outline-info" type="submit">Update</button>
 			</div>
 		</form>
 	</div>
-{% endblock subcontent %}
+{% endblock maincontent %}

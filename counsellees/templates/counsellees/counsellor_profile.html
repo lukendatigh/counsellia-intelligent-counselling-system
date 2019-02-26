@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block subcontent %}
 	
-	<div class="content-section">
+	<div class="shadow content-section">
 		<br>
 		<legend class="border-bottom mb-4">
 			<h4>Profile</h4>
@@ -12,8 +12,8 @@
 			<div class="media-body">
 				<h3 class="account-heading">{{ counsellor.user.first_name }} {{ counsellor.user.last_name }}</h3>
 				<p class="text-secondary">{{ counsellor.quote }}</p>
-				<a class= "btn btn-outline-info btn-sm" href="">Message</a>
-				<a class= "btn btn-info btn-sm" href="">Book Appointment</a>
+				<a class= "shadow-sm btn btn-outline-info btn-sm" href="">Message</a>
+				<a class= "shadow-sm btn btn-info btn-sm" href="">Book Appointment</a>
 			</div>
 		</div>
 		<h4 class="pb-1"></h4>

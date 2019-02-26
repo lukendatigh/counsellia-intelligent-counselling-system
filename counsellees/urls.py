@@ -14,7 +14,7 @@ from . views import (
 urlpatterns = [
 	
 	# home page(appointment list) and user's profile
-	path('', AppointmentListView.as_view(), name = 'counsellee-home'),
+	path('', AppointmentListView.as_view(), name = 'counsellee-appointment-list'),
 	path('profile/', counsellee_views.profile_update, name = 'counsellee-profile'),
 
 	path('appointment/<int:pk>/', 

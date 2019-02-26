@@ -56,6 +56,10 @@ class ReportDetail(DetailView):
 	model = Report
 	template_name = 'counsellors/report_detail.html'
 
+class ReportDeleteView(DeleteView):
+	model = Report
+	template_name = 'counsellors/report_delete.html'
+
 
 class CounselleeListView(ListView):
 	model = Counsellee
@@ -80,7 +84,7 @@ def profile_update(request):
 			u_form.save()
 			p_form.save()
 			messages.success(request, f'Your profile has been updated!')
-			return redirect('counsellor-home')
+			return redirect('counsellor-schedule')
 	else:
 		u_form = UserUpdateForm(instance = request.user)
 		p_form = ProfileUpdateForm(instance = request.user.counsellor)
