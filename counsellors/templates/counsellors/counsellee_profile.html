@@ -1,0 +1,53 @@
+{% extends 'counsellia/counsellor_subbase.html' %}
+{% load crispy_forms_tags %}
+{% block subcontent %}
+	
+	<div class="shadow content-section">
+		<br>
+		<legend class="border-bottom mb-4">
+			<h4>Profile</h4>
+		</legend>
+		<div class="media">
+			<img class= "rounded-circle account-img" src="{{ counsellee.image.url }}">
+			<div class="media-body">
+				<h3 class="account-heading">{{ counsellee.user.first_name }} {{ counsellee.user.last_name }}</h3>
+				<p class="text-secondary">{{ counsellee.quote }}</p>
+				<a class= "shadow-sm btn btn-outline-success btn-sm" href="">Message</a>
+                <a class= "shadow-sm btn btn-success btn-sm" href="">Book Appointment</a>
+                <a class= "shadow-sm btn btn-success btn-sm" href="">Run Report</a>
+			</div>
+		</div>
+        <h4 class="pb-1"></h4>
+        
+		{% if counsellee.categories.all.count > 1 %}		
+		<h5 class="pt-2">Categories</h5>
+		{% elif counsellee.categories.all.count == 1 %}
+		<h5 class="">Category</h5>
+		{% else %}
+		<h5 class="">No category</h5>
+		{% endif %}
+		{% for category in counsellee.categories.all %}
+		<span class="badge badge-secondary">{{ category.name }}</span>
+        {% endfor %}
+        
+		<h4 class="pb-2"><br></h4>	
+		<h4 class="">Contact Info</h4>
+        <hr>
+        <h6 class="text-muted">Twitter Handle: <br></h6>
+		<h6 class="pb-3">@{{ counsellee.twitter_handle }}</h6>
+		<h6 class="text-muted">Phone Number:<br></h6>
+		<h6 class="pb-3">{{ counsellee.phone_number }}</h6>
+		<h6 class="text-muted">Email Address:<br></h6>
+        <h6 class="pb-3">{{ counsellee.user.email }}</h6>
+        <h6 class="text-muted">Address:<br></h6>
+        <h6 class="pb-4">{{ counsellee.address }}</h6>
+		<br>
+		<h4 class="">Bio</h4>
+		<hr>
+		<h6 class="text-muted">Interests: <br></h6>
+		<h6 class="pb-3">{{ counsellee.interests }}</h6>
+		<h6 class="text-muted">Short Bio:</h6>
+		<h6>{{ counsellee.bio }}</h6>
+	</div>
+	
+{% endblock %}
