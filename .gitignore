@@ -1,4 +1,5 @@
-.pyc
-.pyo
-.vscode
-.vs
+*.pyc
+*.pyo
+*.vscode
+*.vs
+*.pyc
