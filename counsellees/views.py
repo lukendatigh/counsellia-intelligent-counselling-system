@@ -12,7 +12,7 @@ from django.views.generic import (
 	)
 
 from users.models import ( User, Counsellor, Counsellee )
-from counsellia.models import (Appointment, Report)
+from counsellia.models import Appointment
 from .forms import ( UserUpdateForm, ProfileUpdateForm )
 
 
@@ -24,54 +24,47 @@ class AppointmentListView(ListView):
 	ordering = ['-time']
 	paginate_by = 5 
 
-
 class AppointmentDetailView(DetailView):
 	model = Appointment
 	context_object_name = 'appointments'
 	template_name = 'counsellees/appointment_detail.html'
 
-
-class AppointmentCreateView(CreateView):
+class AppointmentCreateView(LoginRequiredMixin, CreateView):
 	model = Appointment
 	template_name = 'counsellees/appointment_create.html'
-	fields = ['title', 'time', 'counsellor']
+	fields = ['description', 'time', 'counsellor']
 
+	def form_valid(self, form):
+		form.instance.counsellee = self.request.user.counselle
+		return super().form_valid(form)
 
 class AppointmentUpdateView(UpdateView):
 	model = Appointment
 	field = ['title', 'time']
 	template_name = 'counsellees/appointment_update.html'
 
-
 class AppointmentDeleteView(DeleteView):
 	model = Appointment
 	template_name = 'counsellees/appointment_delete.html'
 	context_object_name = 'appointment'
+
+
 
 class CounsellorListView(ListView):
 	model = Counsellor
 	template_name = 'counsellees/counsellor_list.html'
 	context_object_name = 'counsellors'
 	# ordering = ['rating']
-	paginate_by = 6
+	paginate_by = 5
 
+	def get_queryset(self):
+		user = self.request.user
+		return Counsellor.objects.filter(specialties__in=user.counsellee.categories.all()).distinct() 
 
 class CounsellorProfileView(DetailView):
 	model = Counsellor
 	template_name = 'counsellees/counsellor_profile.html'
 	context_object_name = 'counsellor'
-
-
-class CounselleeProfileView(DetailView):
-	model = Counsellee
-	template_name = 'counsellees/counsellee_profile_view.html'
-	context_object_name = 'counsellee'
-
-# class CounselleeMessages(ListView):
-# 	model = Conversation
-
-# class CounselleeConversation():
-
 
 
 @login_required
