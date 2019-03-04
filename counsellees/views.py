@@ -29,15 +29,45 @@ class CounsellorListView(ListView):
 		user = self.request.user
 		return Counsellor.objects.filter(specialties__in=user.counsellee.categories.all()).distinct() 
 
+
 class CounsellorProfileView(DetailView):
 	model = Counsellor
 	template_name = 'counsellees/counsellor_profile.html'
 	context_object_name = 'counsellor'
 
 
-class AppointmentListView(ListView):
+class AppointmentPendingView(ListView):
 	model = Appointment
-	template_name = 'counsellees/appointment_list.html'
+	template_name = 'counsellees/appointment_pending.html'
+	context_object_name = 'appointments'
+	ordering = ['-time']
+	paginate_by = 5 
+
+	def get_queryset(self):
+		user = self.request.user
+		return Appointment.objects.filter(counsellee=user.counsellee)
+
+class AppointmentUpcomingView(ListView):
+	model = Appointment
+	template_name = 'counsellees/appointment_upcoming.html'
+	context_object_name = 'appointments'
+	ordering = ['-time']
+	paginate_by = 5 
+
+	def get_queryset(self):
+		user = self.request.user
+		return Appointment.objects.filter(counsellee=user.counsellee)
+
+class AppointmentHeldView(ListView):
+	model = Appointment
+	template_name = 'counsellees/appointment_held.html'
+	context_object_name = 'appointments'
+	ordering = ['-time']
+	paginate_by = 5 
+
+class AppointmentArchivedView(ListView):
+	model = Appointment
+	template_name = 'counsellees/appointment_archived.html'
 	context_object_name = 'appointments'
 	ordering = ['-time']
 	paginate_by = 5 
