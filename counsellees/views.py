@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
@@ -13,40 +14,7 @@ from django.views.generic import (
 
 from users.models import ( User, Counsellor, Counsellee )
 from counsellia.models import Appointment
-from .forms import ( UserUpdateForm, ProfileUpdateForm )
-
-
-
-class AppointmentListView(ListView):
-	model = Appointment
-	template_name = 'counsellees/appointment_list.html'
-	context_object_name = 'appointments'
-	ordering = ['-time']
-	paginate_by = 5 
-
-class AppointmentDetailView(DetailView):
-	model = Appointment
-	context_object_name = 'appointments'
-	template_name = 'counsellees/appointment_detail.html'
-
-class AppointmentCreateView(LoginRequiredMixin, CreateView):
-	model = Appointment
-	template_name = 'counsellees/appointment_create.html'
-	fields = ['description', 'time', 'counsellor']
-
-	def form_valid(self, form):
-		form.instance.counsellee = self.request.user.counselle
-		return super().form_valid(form)
-
-class AppointmentUpdateView(UpdateView):
-	model = Appointment
-	field = ['title', 'time']
-	template_name = 'counsellees/appointment_update.html'
-
-class AppointmentDeleteView(DeleteView):
-	model = Appointment
-	template_name = 'counsellees/appointment_delete.html'
-	context_object_name = 'appointment'
+from .forms import ( UserUpdateForm, ProfileUpdateForm, AppointmentCreateForm )
 
 
 
@@ -66,6 +34,50 @@ class CounsellorProfileView(DetailView):
 	template_name = 'counsellees/counsellor_profile.html'
 	context_object_name = 'counsellor'
 
+
+class AppointmentListView(ListView):
+	model = Appointment
+	template_name = 'counsellees/appointment_list.html'
+	context_object_name = 'appointments'
+	ordering = ['-time']
+	paginate_by = 5 
+
+class AppointmentDetailView(DetailView):
+	model = Appointment
+	context_object_name = 'appointments'
+	template_name = 'counsellees/appointment_detail.html'
+
+class AppointmentUpdateView(UpdateView):
+	model = Appointment
+	field = ['title', 'time']
+	template_name = 'counsellees/appointment_update.html'
+
+class AppointmentDeleteView(DeleteView):
+	model = Appointment
+	template_name = 'counsellees/appointment_delete.html'
+	context_object_name = 'appointment'
+	
+
+
+
+def appointment_create(request, pk):
+	counsellor = Counsellor.objects.get(pk=pk)
+	if request.method == 'POST':
+		form = AppointmentCreateForm(request.POST)
+		if form.is_valid():			
+			appointment = form.save(commit=False)
+			# import pdb
+			# pdb.set_trace()
+			instance = request.user
+			appointment.counsellor = counsellor
+			appointment.counsellee = request.user.counsellee 
+			appointment.save()
+			messages.success(request, f'Appointment requested successfully!')
+			return redirect('available-counsellors')
+	else:
+		form = AppointmentCreateForm()
+	context = {'form': form}
+	return render(request, 'counsellees/appointment_create.html', context)
 
 @login_required
 def profile_update(request):
