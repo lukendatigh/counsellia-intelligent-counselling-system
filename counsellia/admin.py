@@ -3,5 +3,11 @@ from . models import (Appointment, Report)
 from users.models import Category
 
 # Register your models here.
-admin.site.register(Appointment)
+
+class AppointmentAdmin(admin.ModelAdmin):
+	list_display = ['description', 'counsellee', 'counsellor', 'time']
+	list_filter = ['time', 'counsellor', 'counsellee']
+
+
+admin.site.register(Appointment, AppointmentAdmin)
 admin.site.register(Report)
