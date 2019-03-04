@@ -22,8 +22,7 @@ def counsellee_register(request):
 			counsellee.save()
 
 			username = form.cleaned_data.get('username')
-			messages.success(request, f'{username}, your account has been created. You are now able to login!')
-			return redirect('counsellee-login')
+
 	else:
 		form = CounselleeRegisterForm()
 	context = {'title': 'Counsellee Signup','form': form}

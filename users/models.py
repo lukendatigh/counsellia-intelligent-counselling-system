@@ -18,8 +18,8 @@ class Category(models.Model):
 
 
 class User(AbstractUser):
-	is_counsellor = models.BooleanField(default=False, null=True)
-	is_counsellee = models.BooleanField(default=False, null=True)
+	is_counsellor = models.BooleanField('counsellor status', default=False, null=True)
+	is_counsellee = models.BooleanField('counsellee status', default=False, null=True)
 
 	def __str__(self):
 		return self.username
@@ -41,7 +41,7 @@ class Profile(models.Model):
 		abstract = True 
 
 	def __str__(self):
-		return f"{self.user.first_name} {self.user.last_name}'s Profile"
+		return f"{self.user.first_name} {self.user.last_name}"
 
 	if image:
 		def save(self):
@@ -89,3 +89,4 @@ class Counselling(models.Model):
 	class Meta:
 		verbose_name = 'Connection'
 		verbose_name_plural = 'Connections'
+		ordering = ['-date_contacted',]
