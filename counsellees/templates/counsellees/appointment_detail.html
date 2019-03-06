@@ -1,0 +1,29 @@
+{% extends 'counsellia/counsellee_subbase.html' %}
+{% block subcontent %}
+	<article class="shadow content-section">
+		<br>
+		<legend class="border-bottom mb-4">
+			<h2 class="mb-3">Appointment</h2>
+		</legend>
+		<div class="media-body mt-1">
+			<h6>
+			with  <img  style="height: 22px; width: 22px;" class="rounded-circle mb-2 mr-1" src="{{ appointment.counsellor.image.url }}"><a class="mr-2" href="{% url 'selected-counsellor-profile' appointment.counsellor.id %}">
+			<strong>{{ appointment.counsellor.user.first_name }} {{ appointment.counsellor.user.last_name }}</strong></a>on
+			<strong>{{ appointment.time | date:"F d, Y"}}</strong> <span class="badge badge-pill badge-dark">{{ appointment.appointment_type }}</span>
+			</h6>
+			<hr>
+			<h6 class="text-muted">Description<br></h6>
+			<h5 class="pb-3">{{ appointment.description }}</h5>
+			{% if appointment.recommendations %}
+				<h6 class="text-muted">Recommendations<br></h6>
+				<h6 class="pb-3">{{ appointment.recommendations }}</h6>
+			{% endif %}
+			{% if appointment.remarks %}
+				<h6 class="text-muted">Remarks<br></h6>
+				<h6 class="pb-3">{{ appointment.remarks }}</h6>
+			{% endif %}
+			<a class= "shadow-sm btn btn-outline-info btn-sm mt-3 px-1 mt-3 mr-2 mb-1 px-2" href="{% url 'counsellee-appointment-edit' appointment.id %}">Edit</a>
+			<a class= "shadow-sm btn btn-outline-danger btn-sm mt-3 px-1 mt-3 mr-2 mb-1" href="{% url 'counsellee-appointment-delete' appointment.id %}">Delete</a>
+		</div>
+	</article>
+{% endblock %}

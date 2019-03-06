@@ -1,0 +1,24 @@
+{% extends 'counsellia/counsellee_subbase.html' %}
+{% block subcontent %}
+	<h1 class="pb-3">Requested Appointments</h1>
+	<!-- <h6 class="text-muted">awaiting </h6> -->
+	<a class= "shadow-sm btn btn-info btn-sm px-2 mr-2 disabled" href="{% url 'counsellee-appointments-requested' %}" >Requested</a>
+	<a class= "shadow-sm btn btn-outline-info btn-sm px-2 mr-2" href="{% url 'counsellee-appointments-held' %}">Held</a>
+	<a class= "shadow-sm btn btn-outline-info btn-sm px-2 mr-2" href="{% url 'counsellee-appointments-archived' %}">Archived</a>
+	<hr>
+	{% for appointment in appointments %}
+		<article class="shadow-sm media content-section">
+			<div class="media-body mt-1">
+				<h6>
+				with  <img  style="height: 22px; width: 22px;" class="rounded-circle mb-2 mr-1" src="{{ appointment.counsellor.image.url }}"><a class="mr-2" href="{% url 'selected-counsellor-profile' appointment.counsellor.id %}">
+					<strong>{{ appointment.counsellor.user.first_name }} {{ appointment.counsellor.user.last_name }}</strong></a>on
+				<strong>{{ appointment.time | date:"F d, Y"}}</strong><br> <span class="badge badge-pill badge-secondary">{{ appointment.appointment_type }}</span>
+				</h6>
+				<hr>
+				<h4 class="mt-2"><a class="article-title" href="{% url 'counsellee-appointment-detail' appointment.id %}">{{ appointment.description }}</a></h4>
+				<a class= "shadow-sm btn btn-outline-info btn-sm mt-3 px-1 mt-3 mr-2 mb-1 px-2" href="{% url 'counsellee-appointment-edit' appointment.id %}">Edit</a>
+				<a class= "shadow-sm btn btn-outline-danger btn-sm mt-3 px-1 mt-3 mr-2 mb-1" href="{% url 'counsellee-appointment-delete' appointment.id %}">Delete</a>
+			</div>
+		</article>
+	{% endfor %}
+{% endblock subcontent %}
