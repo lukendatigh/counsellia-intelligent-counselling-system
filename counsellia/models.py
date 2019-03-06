@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 from users.models import Counsellor, Counsellee
 
 
@@ -9,24 +10,27 @@ class Appointment(models.Model):
 		('follow-up', 'Follow-up appointment'),
 		('final', 'Final appointment'),
 	)
-	description = models.CharField('Short Description', max_length=128, null=True, blank=True)
+	description = models.CharField('Short Description', max_length=256, null=True, blank=True)
 	counsellee = models.ForeignKey(Counsellee, on_delete=models.CASCADE, null=True)
 	counsellor = models.ForeignKey(Counsellor, on_delete=models.CASCADE, null=True)
-	time = models.DateTimeField()
+	time = models.DateField('appointment date')
 	appointment_type = models.CharField('Appointment Type', max_length=20, choices=TYPE, null=True)
 	requested = models.BooleanField(default=True, null=True)
 	fixed = models.BooleanField(default=False, null=True)
 	held = models.BooleanField(default=False, null=True)
 	remarks = models.TextField(null=True, blank=True)
 	recommendations = models.TextField(null=True, blank=True)
-	counsellee_archived = models.BooleanField(default=False, null=True)
-	counsellor_archived = models.BooleanField(default=False, null=True)
+	counsellee_archived = models.BooleanField(default=False)
+	counsellor_archived = models.BooleanField(default=False)
 	
 	def __str__(self):
 		return self.description
 
+	def get_absolute_url(self):
+		return reverse('counsellee-appointment-detail', kwargs={'pk': self.pk})
+
 	class Meta:
-		ordering = ['-time',]
+		ordering = ['time',]
 
 
 class Report(models.Model):
