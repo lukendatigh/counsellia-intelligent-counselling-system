@@ -1,5 +1,8 @@
 from django import forms
-from users.models import ( User, Counsellee )
+from users.models import User, Counsellee, Counsellor
+from counsellia.models import Appointment
+
+
 
 class UserUpdateForm(forms.ModelForm):
 	class Meta:
@@ -8,7 +11,6 @@ class UserUpdateForm(forms.ModelForm):
 		help_texts = {
 			'username': None,
 		}
-
 
 class ProfileUpdateForm(forms.ModelForm):
 	class Meta:
@@ -20,4 +22,23 @@ class ProfileUpdateForm(forms.ModelForm):
 			'dob': forms.TextInput(attrs={'type': 'date'}),
 			'bio': forms.Textarea(attrs={'rows':3}),
 			'interests': forms.Textarea(attrs={'rows':3}),
+		}
+
+
+class AppointmentCreateForm(forms.ModelForm):
+	class Meta:
+		model = Appointment
+		fields = ['description', 'time', 'appointment_type']
+		widgets = {
+			'time': forms.DateInput(attrs={'type': 'date'}),
+			# 'time': forms.TextInput(attrs={'type': 'date'}),
+		}
+
+
+class AppointmentEditForm(forms.ModelForm):
+	class Meta:
+		model = Appointment
+		fields = ['description', 'remarks', 'time', 'counsellee_archived']
+		widgets = {
+		'time': forms.DateInput(attrs={'type': 'date'}),
 		}
