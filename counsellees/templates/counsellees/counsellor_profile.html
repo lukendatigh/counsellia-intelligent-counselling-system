@@ -1,11 +1,10 @@
 {% extends 'counsellia/counsellee_subbase.html' %}
-{% load crispy_forms_tags %}
 {% block subcontent %}
 	
 	<div class="shadow content-section">
 		<br>
 		<legend class="border-bottom mb-4">
-			<h4>Profile</h4>
+			<h4 class="mb-2">Counsellor Profile</h4>
 		</legend>
 		<div class="media">
 			<img class= "rounded-circle account-img" src="{{ counsellor.image.url }}">

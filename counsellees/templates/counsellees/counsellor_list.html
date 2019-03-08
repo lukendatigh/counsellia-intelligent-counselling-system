@@ -21,7 +21,7 @@
 						<p class="article-content">{{ counsellor.bio }}...</p>
 					{% endif %}
 					<a class= "shadow-sm btn btn-outline-info btn-sm" href="">Message</a>
-					<a class= "shadow-sm btn btn-info btn-sm" href="{% url 'counsellee-appointment-create' %}">Book Appointment</a>
+					<a class= "shadow-sm btn btn-info btn-sm" href="{% url 'counsellee-appointment-create' counsellor.id %}">Request Appointment</a>
 				</div>
 			</article>
 		{% endif %}

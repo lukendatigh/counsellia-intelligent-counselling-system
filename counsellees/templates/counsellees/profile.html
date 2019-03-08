@@ -1,36 +1,56 @@
 {% extends 'counsellia/counsellee_base.html' %}
 {% load crispy_forms_tags %}
 {% block maincontent %}
-<div class="shadow-sm content-section">
-	<br>
-	<div class="media">
-		<img class= "rounded-circle account-img" src="{{ user.counsellee.image.url }}">
-		<div class="media-body">
-			<br>
-			<h2 class="account-heading">{{ user.first_name }} {{ user.last_name }}</h2>
-			<p class="text-secondary">{{ user.email }}</p>
-		</div>
-	</div>
-	<br>
-	<form method="POST" enctype="multipart/form-data">
-		{% csrf_token %}
-		<fieldset class="form-group" enctype="multipart/form-data">
-			<legend class="border-bottom mb-4">
-				<h2>Profile Info</h2>
-			</legend>
-			<div class="row">
-				<div class="col">
-					{{ u_form | crispy}}
-				</div>
-				<div class="col">
-					{{ p_form | crispy}}
-				</div>
+	<div class="shadow-sm content-section">
+		<br>
+		<div class="media">
+			<img class= "rounded-circle account-img" src="{{ user.counsellee.image.url }}">
+			<div class="media-body">
+				<br>
+				<h2 class="account-heading">{{ user.first_name }} {{ user.last_name }}</h2>
+				<p class="text-secondary">{{ user.email }}</p>
 			</div>
-		</fieldset>
-		<div class="form-group">
-			<button class="btn btn-outline-info" type="submit">Update</button>
 		</div>
-	</form>
-</div>
-{{ form.media.js }}
+		<br>
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<fieldset class="form-group" enctype="multipart/form-data">
+				<legend class="border-bottom mb-4">
+					<h2>Profile Info</h2>
+				</legend>
+				<div class="row">
+					<div class="col-7">
+						<div class="row">
+							<div class="col">
+								{{ u_form.username | as_crispy_field }}
+								{{ u_form.first_name | as_crispy_field }}
+								{{ p_form.twitter_handle | as_crispy_field }}
+								{{ p_form.address | as_crispy_field }}
+							</div>
+							<div class="col">
+								{{ u_form.email | as_crispy_field }}
+								{{ u_form.last_name | as_crispy_field }}
+								<div class="row">
+									<div class="col-7">{{ p_form.dob | as_crispy_field }}</div>
+									<div class="col-5">{{ p_form.gender | as_crispy_field }}</div>
+								</div>
+								{{ p_form.phone_number | as_crispy_field }}
+							</div>
+						</div>
+						{{ p_form.bio | as_crispy_field }}
+						{{ p_form.interests | as_crispy_field }}
+					</div>
+					<div class="col-5">
+						{{ p_form.categories | as_crispy_field }}
+						{{ p_form.image | as_crispy_field }}
+						{{ p_form.active | as_crispy_field }}
+					</div>
+				</div>
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit">Update</button>
+			</div>
+		</form>
+	</div>
+	{{ form.media.js }}
 {% endblock %}

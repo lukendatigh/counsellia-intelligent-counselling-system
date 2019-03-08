@@ -18,7 +18,7 @@ class ProfileUpdateForm(forms.ModelForm):
 		fields = ['categories', 'twitter_handle', 'dob', 'gender', 'address', 'phone_number', 'bio', 'interests', 'active', 'image']
 		widgets = {
 			# 'categories': Select2Widget,
-			'categories': forms.SelectMultiple(attrs={'size':9}),
+			'categories': forms.SelectMultiple(attrs={'size':16}),
 			'dob': forms.TextInput(attrs={'type': 'date'}),
 			'bio': forms.Textarea(attrs={'rows':3}),
 			'interests': forms.Textarea(attrs={'rows':3}),
