@@ -13,7 +13,7 @@ class Appointment(models.Model):
 	description = models.CharField('Short Description', max_length=256, null=True, blank=True)
 	counsellee = models.ForeignKey(Counsellee, on_delete=models.CASCADE, null=True)
 	counsellor = models.ForeignKey(Counsellor, on_delete=models.CASCADE, null=True)
-	time = models.DateField('appointment date')
+	time = models.DateField('Appointment Date')
 	appointment_type = models.CharField('Appointment Type', max_length=20, choices=TYPE, null=True)
 	requested = models.BooleanField(default=True, null=True)
 	fixed = models.BooleanField(default=False, null=True)

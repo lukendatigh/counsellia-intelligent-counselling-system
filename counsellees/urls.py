@@ -3,14 +3,14 @@ from django.urls import path, include
 from . import views as counsellee_views
 from . views import (
 	AppointmentDetailView,
-	AppointmentUpdateView,
+	AppointmentEditView,
 	AppointmentDeleteView,
 	CounsellorListView,
 	CounsellorProfileView,
-	AppointmentPendingView,
-	AppointmentUpcomingView,
-	AppointmentHeldView,
-	AppointmentArchivedView,
+	AppointmentsUpcomingView,
+	AppointmentsRequestedView,
+	AppointmentsHeldView,
+	AppointmentsArchivedView,
 	)
 
 
@@ -24,29 +24,30 @@ urlpatterns = [
 	path('counsellor/<int:pk>/appointment/', 
 		counsellee_views.appointment_create, 
 		name = 'counsellee-appointment-create'),
-	path('appointment/<int:pk>/update/', 
-		AppointmentUpdateView.as_view(), 
-		name = 'counsellee-appointment-update'),
-	path('appointment/<int:pk>/delete/',
-		AppointmentDeleteView.as_view(),
-		name = 'counsellee-appointment-delete'),
 	path('appointment/<int:pk>/', 
 		AppointmentDetailView.as_view(),
 		name = 'counsellee-appointment-detail'),
+	path('appointment/<int:pk>/edit/',
+		AppointmentEditView.as_view(), 
+		name = 'counsellee-appointment-edit'),
+	path('appointment/<int:pk>/delete/',
+		AppointmentDeleteView.as_view(),
+		name = 'counsellee-appointment-delete'),
+
 
 
 	# apoointment lists (pending, upcoming, held, archived)
-	path('appointments/pending/',
-		AppointmentPendingView.as_view(),
-		name = 'counsellee-appointments-pending'),
 	path('appointments/upcoming/',
-		AppointmentUpcomingView.as_view(),
+		AppointmentsUpcomingView.as_view(),
 		name = 'counsellee-appointments-upcoming'),
+	path('appointments/requested/',
+		AppointmentsRequestedView.as_view(),
+		name = 'counsellee-appointments-requested'),
 	path('appointments/held/',
-		AppointmentHeldView.as_view(),
+		AppointmentsHeldView.as_view(),
 		name = 'counsellee-appointments-held'),
 	path('appointments/archived/',
-		AppointmentArchivedView.as_view(),
+		AppointmentsArchivedView.as_view(),
 		name = 'counsellee-appointments-archived'),
 
 

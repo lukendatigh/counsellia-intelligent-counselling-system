@@ -35,7 +35,7 @@ class Profile(models.Model):
 	address = models.CharField(max_length=200, null=True, blank = True)
 	phone_number = models.BigIntegerField('mobile number', null=True, blank=True)
 	bio = models.TextField('short bio', null=True, blank=True)
-	image = models.ImageField(default='default.png', upload_to='profile_photos', null=True, blank=True)
+	image = models.ImageField('Profile Picture', default='default.png', upload_to='profile_photos', null=True, blank=True)
 
 	class Meta:
 		abstract = True 

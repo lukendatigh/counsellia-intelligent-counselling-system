@@ -5,7 +5,7 @@ from users.models import Category
 # Register your models here.
 
 class AppointmentAdmin(admin.ModelAdmin):
-	list_display = ['description', 'counsellee', 'counsellor', 'time']
+	list_display = ['description', 'counsellor', 'counsellee', 'time']
 	list_filter = ['time', 'counsellor', 'counsellee']
 
 
