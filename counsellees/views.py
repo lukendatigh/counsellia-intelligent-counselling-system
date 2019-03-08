@@ -4,10 +4,11 @@ from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
 
 from django.views.generic import (
-	ListView, 
+	ListView,
 	DetailView,
 	CreateView,
 	UpdateView,
@@ -20,7 +21,7 @@ from .forms import UserUpdateForm, ProfileUpdateForm, AppointmentCreateForm, App
 
 
 
-# Counsellor Views (list, profile details)
+# Counsellor Views (list of counsellors and their profile details)
 class CounsellorListView(ListView):
 	model = Counsellor
 	template_name = 'counsellees/counsellor_list.html'
@@ -49,7 +50,7 @@ class AppointmentsUpcomingView(ListView):
 
 	def get_queryset(self):
 		user = self.request.user
-		return Appointment.objects.filter(counsellee=user.counsellee).filter(requested=True).filter(fixed=True)
+		return Appointment.objects.filter(counsellee=user.counsellee).filter(requested=True).filter(fixed=True).filter(held=False)
 
 
 class AppointmentsRequestedView(ListView):
@@ -99,7 +100,7 @@ def appointment_create(request, pk):
 			appointment.counsellee = request.user.counsellee 
 			appointment.save()
 			messages.success(request, f'Appointment requested successfully!')
-			return redirect('available-counsellors')
+			return redirect('counsellee-appointments-requested')
 	else:
 		form = AppointmentCreateForm()
 	context = {'form': form}
@@ -112,17 +113,19 @@ class AppointmentDetailView(DetailView):
 	template_name = 'counsellees/appointment_detail.html'
 
 
-class AppointmentEditView(UpdateView):
+class AppointmentEditView(SuccessMessageMixin, UpdateView):
 	model = Appointment
 	form_class = AppointmentEditForm
 	template_name = 'counsellees/appointment_edit.html'
+	success_message = "Appointment edited successfully!"
 
 
-class AppointmentDeleteView(DeleteView):
+class AppointmentDeleteView(SuccessMessageMixin, DeleteView):
 	model = Appointment
-	template_name = 'counsellees/appointment_delete.html'
+	template_name = 'counsellees/appointment_confirm_delete.html'
 	context_object_name = 'appointment'
-	
+	success_url = '/counsellee/appointments/upcoming/'
+	success_message = "Appointment Deleted!"
 
 
 
@@ -136,10 +139,24 @@ def profile_update(request):
 			u_form.save()
 			p_form.save()
 			messages.success(request, f'Your profile has been updated!')
-			return redirect('counsellee-home')
+			return redirect('counsellee-appointments-upcoming')
 	else:
 		u_form = UserUpdateForm(instance = request.user)
 		p_form = ProfileUpdateForm(instance = request.user.counsellee)
 
 	context = {'u_form': u_form, 'p_form': p_form}
 	return render(request, 'counsellees/profile.html', context)
+
+
+@login_required
+def counsellee_notifications(request):
+	counsellee = request.user.counsellee 
+	upcoming_appointments = Appointments.objects.filter(
+		counsellee=counsellee).filter(
+		held=False).filter(
+		counsellee_archived=False
+	)
+	#filter(fixed=True).filter(held=False).filter(counsellee_archived=False)
+	appointments_count = upcoming_appointments.count()
+	context = {'appointments_count': appointments_count }
+	return render(request, 'counsellia/counsellee_subbbase.html', context)
