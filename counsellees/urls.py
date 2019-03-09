@@ -6,6 +6,7 @@ from . views import (
 	AppointmentEditView,
 	AppointmentDeleteView,
 	CounsellorListView,
+	ContactedCounsellorListView,
 	CounsellorProfileView,
 	AppointmentsUpcomingView,
 	AppointmentsRequestedView,
@@ -52,8 +53,10 @@ urlpatterns = [
 
 
 	# Viewing list of counsellors and their profiles
-	path('counsellors/', CounsellorListView.as_view(),
+	path('counsellors/available/', CounsellorListView.as_view(),
 		name = 'available-counsellors'),
+	path('counsellors/contacted/', ContactedCounsellorListView.as_view(),
+		name = 'contacted-counsellors'),
 	path('counsellor/<int:pk>/', CounsellorProfileView.as_view(),
 		name = 'selected-counsellor-profile'),
 	# path('counsellor/<str:username>/profile/', CounsellorProfileView.as_view(),

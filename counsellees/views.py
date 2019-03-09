@@ -15,13 +15,14 @@ from django.views.generic import (
 	DeleteView
 	)
 
-from users.models import User, Counsellor, Counsellee
+from users.models import User, Counsellor, Counsellee, Counselling
 from counsellia.models import Appointment
 from .forms import UserUpdateForm, ProfileUpdateForm, AppointmentCreateForm, AppointmentEditForm
 
 
 
-# Counsellor Views (list of counsellors and their profile details)
+# Counsellor Views 
+# (list of available counsellors, contacted counsellors, and counsellor profile)
 class CounsellorListView(ListView):
 	model = Counsellor
 	template_name = 'counsellees/counsellor_list.html'
@@ -30,9 +31,19 @@ class CounsellorListView(ListView):
 	paginate_by = 5
 
 	def get_queryset(self):
-		user = self.request.user
-		return Counsellor.objects.filter(specialties__in=user.counsellee.categories.all()).distinct() 
+		counsellee = self.request.user.counsellee
+		return Counsellor.objects.filter(specialties__in=counsellee.categories.all()).distinct() 
 
+
+class ContactedCounsellorListView(ListView):
+	model = Counsellor
+	template_name = 'counsellees/counsellor_contacted_list.html'
+	context_object_name = 'counsellors'
+
+	def get_queryset(self):
+		counsellee = self.request.user.counsellee
+		return Counsellor.objects.filter(counsellees=counsellee).distinct()
+	
 
 class CounsellorProfileView(DetailView):
 	model = Counsellor
@@ -40,6 +51,8 @@ class CounsellorProfileView(DetailView):
 	context_object_name = 'counsellor'
 
 
+
+		
 
 # Appointment Lists (upcoming, requested, held, archived)
 class AppointmentsUpcomingView(ListView):
@@ -86,19 +99,23 @@ class AppointmentsArchivedView(ListView):
 		return Appointment.objects.filter(counsellee=user.counsellee).filter(counsellee_archived=True)
 
 
+
 # General Appointment Views (create, detail, edit, delete)
 def appointment_create(request, pk):
+	counsellee = request.user.counsellee
 	counsellor = Counsellor.objects.get(pk=pk)
 	if request.method == 'POST':
 		form = AppointmentCreateForm(request.POST)
 		if form.is_valid():			
 			appointment = form.save(commit=False)
-			# import pdb
-			# pdb.set_trace()
-			instance = request.user
+			appointment.counsellee = counsellee
 			appointment.counsellor = counsellor
-			appointment.counsellee = request.user.counsellee 
 			appointment.save()
+			# record contacted status
+			if not Counselling.objects.filter(counsellor=counsellor, counsellee=counsellee).exists():
+				new_record = Counselling(counsellor = counsellor, counsellee = counsellee) 
+				new_record.save()
+			
 			messages.success(request, f'Appointment requested successfully!')
 			return redirect('counsellee-appointments-requested')
 	else:
