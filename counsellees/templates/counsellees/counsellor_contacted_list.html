@@ -1,9 +1,9 @@
 {% extends 'counsellia/counsellee_subbase.html' %}
 {% block subcontent %}
-	<h1>Available Counsellors</h1>
-	<h6 class="text-muted pb-3">a curated list of counsellors based on your needs</h6>
-	<a class= "shadow-sm btn btn-info btn-sm px-2 mr-2 disabled" href="{% url 'available-counsellors' %}" >Available</a>
-	<a class= "shadow-sm btn btn-outline-info btn-sm px-2 mr-2" href="{% url 'contacted-counsellors' %}">Contacted</a>
+	<h1>Previously Contacted Counsellors</h1>
+	<h6 class="text-muted pb-3">a list of counsellors you have contacted previously</h6>
+	<a class= "shadow-sm btn btn-outline-info btn-sm px-2 mr-2" href="{% url 'available-counsellors' %}" >Available</a>
+	<a class= "shadow-sm btn btn-info btn-sm px-2 mr-2 disabled" href="{% url 'contacted-counsellors' %}">Contacted</a>
 	<hr>
 	<p class="mb-3"></p>
 	{% for counsellor in counsellors %}

@@ -1,3 +1,11 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cabin' !important;
+}
+p, div {
+  font-family: 'Cabin' !important;
+}
+
+
 .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
   min-height: 100vh; /* These two lines are counted as one :-)       */

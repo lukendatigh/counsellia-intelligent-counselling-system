@@ -1,24 +1,24 @@
 {% extends 'counsellia/counsellor_base.html' %}
 {% block maincontent %}
-	<div class="row">
-		<div class="col-md-8">
-			{% if messages %}
-				{% for message in messages %}
-					<div class="alert alert-{{ message.tags }}">
-						{{ message }}
-					</div>
-				{% endfor %}
-			{% endif %}
-			{% block subcontent %}
-			{% endblock subcontent %}
-		</div>
-		<div class="col-md-4">
-			<div class="content-section">
-				<h3 class="pt-2">Notifications</h3>
-				<hr>
-				<h6>Messages <a href="" class="badge badge-pill badge-primary">None</a></h6>
-				<h6>Appointment Requests <a href="" class="badge badge-pill badge-primary">None</a></h6>
-			</div>
+<div class="row">
+	<div class="col-md-8">
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert alert-{{ message.tags }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% block subcontent %}
+		{% endblock subcontent %}
+	</div>
+	<div class="col-md-4">
+		<div class="content-section">
+			<h3 class="pt-2">Notifications</h3>
+			<hr>
+			<h6>Messages <a href="" class="badge badge-pill badge-primary">None</a></h6>
+			<h6>Appointment Requests <a href="" class="badge badge-pill badge-primary">None</a></h6>
 		</div>
 	</div>
+</div>
 {% endblock maincontent %}

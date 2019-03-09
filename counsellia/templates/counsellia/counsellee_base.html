@@ -4,8 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content = "width = device-width, initial-scale = 1, shrink-to-fit-no" >
+		<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
 		<link rel = "stylesheet" type = "text/css" href = "{% static 'css/bootstrap.min.css' %} " >
 		<link rel = "stylesheet" type = "text/css" href = "{% static 'css/main.css' %} " >
+		<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
 		{% if title %}
 			<title>{{ title }}</title>
 		{% else %}
@@ -15,7 +17,7 @@
 	<body>
 		<header class="site-header">
 			<nav class="border-bottom-0 border-secondary shadow-sm navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-				<div class="container">	
+				<div class="container">
 					<span class="navbar-brand mb-0 h1">Counsellia</span>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
 					<span class="navbar-toggler-icon"></span>
@@ -23,18 +25,9 @@
 					<div class="collapse navbar-collapse" id="navbar">
 						{% if user.is_authenticated is True %}
 							<ul class="navbar-nav mr-auto">
-								<a class="nav-item nav-link" href="{% url 'counsellee-appointment-list' %}">Schedule</a>
+								<a class="nav-item nav-link" href="{% url 'counsellee-appointments-upcoming' %}">Schedule</a>
+								<a class="nav-item nav-link" href="{% url 'counsellee-appointments-requested' %}">Appointments</a>
 								<a class="nav-item nav-link" href="{% url 'available-counsellors' %}">Counsellors</a>
-								<li class="nav-item dropdown">
-									<a class="nav-link" href="" id="appointmentDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Appointments
-									</a>
-									<div class="dropdown-menu" aria-labelledby="appointmentDropdownMenuLink">
-										<a class="dropdown-item" href="#">Pending</a>
-										<a class="dropdown-item" href="#">Held</a>
-										<a class="dropdown-item" href="#">Archived</a>
-									</div>
-								</li>
 							</ul>
 							{% elif user.is_authenticated is False %}
 							<div class="navbar-nav mr-auto">
