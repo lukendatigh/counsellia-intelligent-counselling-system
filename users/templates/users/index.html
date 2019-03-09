@@ -4,6 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content = "width = device-width, initial-scale = 1, shrink-to-fit-no" >
+		<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
 		<link rel = "stylesheet" type = "text/css" href = "{% static 'css/bootstrap.min.css' %} " >
 		<link rel = "stylesheet" type = "text/css" href = "{% static 'css/main.css' %} " >
 		{% if title %}
@@ -24,15 +25,23 @@
 						<br>and view details from previous appointments
 						<br>such as reports, remarks and recommendations.<br>
 						</h5>
-						<a class="btn btn-info btn-sm" href="{% url 'counsellee-login' %}" role=""><strong>Get Help</strong></a>
+						{% if user.is_authenticated is True %}
+							<a class="btn btn-info btn-sm" href="{% url 'counsellee-appointments-upcoming' %}" role=""><strong>Get Help</strong></a>
+							{% elif user.is_authenticated is False %}
+							<a class="btn btn-info btn-sm" href="{% url 'counsellee-login' %}" role=""><strong>Get Help</strong></a>
+						{% endif %}
 					</div>
 					<div class="col">
 						<h2 class="text-success"><strong>For Counsellors</strong></h2>
 						<h5 class="mb-4">
 						Manage appointments with clients in one place.
-						<br>Employ the use of ML algorithms to perform semantic analysis and aid in decision making.
+						<br>Employ the use of NLP algorithms to perform sentiment analysis and aid in decision making.
 						</h5>
-						<a class="btn btn-success btn-sm" href="{% url 'counsellor-login' %}" role="button"><strong>Help People</strong></a>
+						{% if user.is_authenticated is True %}
+							<a class="btn btn-success btn-sm" href="{% url 'counsellor-profile' %}" role="button"><strong>Help People</strong></a>
+							{% elif user.is_authenticated is False %}
+							<a class="btn btn-success btn-sm" href="{% url 'counsellor-login' %}" role="button"><strong>Help People</strong></a>
+						{% endif %}
 					</div>
 				</div>
 			</div>
