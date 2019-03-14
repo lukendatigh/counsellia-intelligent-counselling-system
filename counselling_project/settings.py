@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     # 'chat.apps.ChatConfig',
+    'analysis.apps.AnalysisConfig',
     'counsellia.apps.CounselliaConfig',
     'counsellees.apps.CounselleesConfig',
     'counsellors.apps.CounsellorsConfig',
