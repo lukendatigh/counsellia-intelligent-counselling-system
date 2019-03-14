@@ -15,9 +15,9 @@ class Appointment(models.Model):
 	counsellor = models.ForeignKey(Counsellor, on_delete=models.CASCADE, null=True)
 	time = models.DateField('Appointment Date')
 	appointment_type = models.CharField('Appointment Type', max_length=20, choices=TYPE, null=True)
-	requested = models.BooleanField(default=True, null=True)
-	fixed = models.BooleanField(default=False, null=True)
-	held = models.BooleanField(default=False, null=True)
+	requested = models.BooleanField(default=True)
+	fixed = models.BooleanField('fix appointment?', default=False)
+	held = models.BooleanField('appointment held?', default=False)
 	remarks = models.TextField(null=True, blank=True)
 	recommendations = models.TextField(null=True, blank=True)
 	counsellee_archived = models.BooleanField(default=False)
@@ -26,27 +26,5 @@ class Appointment(models.Model):
 	def __str__(self):
 		return self.description
 
-	def get_absolute_url(self):
-		return reverse('counsellee-appointment-detail', kwargs={'pk': self.pk})
-
 	class Meta:
 		ordering = ['time',]
-
-
-class Report(models.Model):
-	counsellee = models.ForeignKey(Counsellee, on_delete=models.CASCADE, null=True)
-	counsellor = models.ForeignKey(Counsellor, on_delete=models.CASCADE, null=True)
-	description = models.CharField('short description', max_length=256, null=True)
-	time = models.DateTimeField(default=timezone.now, blank=True, null=True)
-	text = models.TextField(blank=True, null=True)
-	topic = models.TextField(blank=True, null=True)
-	word_count = models.TextField(blank=True, null=True)
-	sentiment = models.TextField('sentiment analysis', null=True)
-	remarks = models.TextField(blank=True, null=True)
-	archived = models.BooleanField(default=False, null=True)
-
-	def __str__(self):
-		return self.description
-
-	class Meta:
-		ordering = ['counsellee', '-time',]

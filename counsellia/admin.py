@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import (Appointment, Report)
+from . models import Appointment
 from users.models import Category
 
 # Register your models here.
@@ -10,4 +10,3 @@ class AppointmentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Appointment, AppointmentAdmin)
-admin.site.register(Report)
