@@ -17,7 +17,6 @@ class ProfileUpdateForm(forms.ModelForm):
 		model = Counsellee
 		fields = ['categories', 'twitter_handle', 'dob', 'gender', 'address', 'phone_number', 'bio', 'interests', 'active', 'image']
 		widgets = {
-			# 'categories': Select2Widget,
 			'categories': forms.SelectMultiple(attrs={'size':16}),
 			'dob': forms.TextInput(attrs={'type': 'date'}),
 			'bio': forms.Textarea(attrs={'rows':3}),
@@ -31,7 +30,6 @@ class AppointmentCreateForm(forms.ModelForm):
 		fields = ['description', 'time', 'appointment_type']
 		widgets = {
 			'time': forms.DateInput(attrs={'type': 'date'}),
-			# 'time': forms.TextInput(attrs={'type': 'date'}),
 		}
 
 

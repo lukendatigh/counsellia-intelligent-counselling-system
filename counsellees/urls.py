@@ -21,6 +21,9 @@ urlpatterns = [
 	path('profile/', counsellee_views.profile_update, name = 'counsellee-profile'),
 
 
+	# notifications
+	path('', counsellee_views.counsellee_notifications, name = 'counsellee-notifications'),
+
 	# appointment create, update, delete and view details
 	path('counsellor/<int:pk>/appointment/', 
 		counsellee_views.appointment_create, 
@@ -29,7 +32,7 @@ urlpatterns = [
 		AppointmentDetailView.as_view(),
 		name = 'counsellee-appointment-detail'),
 	path('appointment/<int:pk>/edit/',
-		AppointmentEditView.as_view(), 
+		AppointmentEditView.as_view(success_url="/counsellee/appointments/upcoming/"), 
 		name = 'counsellee-appointment-edit'),
 	path('appointment/<int:pk>/delete/',
 		AppointmentDeleteView.as_view(),
@@ -52,7 +55,7 @@ urlpatterns = [
 		name = 'counsellee-appointments-archived'),
 
 
-	# Viewing list of counsellors and their profiles
+	# counsellor list and profile
 	path('counsellors/available/', CounsellorListView.as_view(),
 		name = 'available-counsellors'),
 	path('counsellors/contacted/', ContactedCounsellorListView.as_view(),

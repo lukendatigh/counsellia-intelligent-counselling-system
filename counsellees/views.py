@@ -62,8 +62,13 @@ class AppointmentsUpcomingView(ListView):
 	paginate_by = 5 
 
 	def get_queryset(self):
-		user = self.request.user
-		return Appointment.objects.filter(counsellee=user.counsellee).filter(requested=True).filter(fixed=True).filter(held=False)
+		counsellee = self.request.user.counsellee
+		return Appointment.objects.filter(
+			counsellee=counsellee).filter(
+			requested=True).filter(
+			fixed=True).filter(
+			held=False).filter(
+			counsellee_archived=False)
 
 
 class AppointmentsRequestedView(ListView):
@@ -73,8 +78,13 @@ class AppointmentsRequestedView(ListView):
 	paginate_by = 5 
 
 	def get_queryset(self):
-		user = self.request.user
-		return Appointment.objects.filter(counsellee=user.counsellee).filter(requested=True).filter(counsellee_archived=False)
+		counsellee = self.request.user.counsellee
+		return Appointment.objects.filter(
+			counsellee=counsellee).filter(
+			requested=True).filter(
+			fixed=False).filter(
+			held=False).filter(
+			counsellee_archived=False)
 
 
 class AppointmentsHeldView(ListView):
@@ -84,8 +94,12 @@ class AppointmentsHeldView(ListView):
 	paginate_by = 5 
 
 	def get_queryset(self):
-		user = self.request.user
-		return Appointment.objects.filter(counsellee=user.counsellee).filter(held=True)
+		counsellee = self.request.user.counsellee
+		return Appointment.objects.filter(
+			counsellee=counsellee).filter(
+			requested=True).filter(
+			held=True).filter(
+			counsellee_archived=False)
 
 
 class AppointmentsArchivedView(ListView):
@@ -95,8 +109,12 @@ class AppointmentsArchivedView(ListView):
 	paginate_by = 5 
 
 	def get_queryset(self):
-		user = self.request.user
-		return Appointment.objects.filter(counsellee=user.counsellee).filter(counsellee_archived=True)
+		counsellee = self.request.user.counsellee
+		return Appointment.objects.filter(
+			counsellee=counsellee).filter(
+			counsellee_archived=True)
+
+
 
 
 
@@ -165,15 +183,16 @@ def profile_update(request):
 	return render(request, 'counsellees/profile.html', context)
 
 
-@login_required
+
 def counsellee_notifications(request):
 	counsellee = request.user.counsellee 
-	upcoming_appointments = Appointments.objects.filter(
-		counsellee=counsellee).filter(
-		held=False).filter(
-		counsellee_archived=False
-	)
+	upcoming_appointments = Appointment.objects.filter(
+			counsellee=counsellee).filter(
+			requested=True).filter(
+			fixed=True).filter(
+			held=False).filter(
+			counsellee_archived=False)
 	#filter(fixed=True).filter(held=False).filter(counsellee_archived=False)
 	appointments_count = upcoming_appointments.count()
-	context = {'appointments_count': appointments_count }
+	context = {'appointments_count': appointments_count, 'upcoming_appointments': upcoming_appointments}
 	return render(request, 'counsellia/counsellee_subbbase.html', context)
