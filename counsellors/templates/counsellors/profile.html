@@ -19,11 +19,32 @@
 					<h2>Profile Info</h2>
 				</legend>
 				<div class="row">
-					<div class="col">
-						{{ u_form | crispy}}
+					<div class="col-7">
+						<div class='row'>
+							<div class="col">
+								{{ u_form.username | as_crispy_field }}
+								{{ u_form.first_name | as_crispy_field }}
+								{{ p_form.quote | as_crispy_field }}
+								{{ p_form.address | as_crispy_field }}
+							</div>
+							<div class="col">
+								{{ u_form.email | as_crispy_field }}
+								{{ u_form.last_name | as_crispy_field }}
+								<div class="row">
+									<div class="col-7">{{ p_form.dob | as_crispy_field }}</div>
+									<div class="col-5">{{ p_form.gender | as_crispy_field }}</div>
+								</div>
+								{{ p_form.phone_number | as_crispy_field }}
+							</div>
+						</div>
+						{{ p_form.bio | as_crispy_field }}
+						{{ p_form.qualification | as_crispy_field }}
 					</div>
-					<div class="col">
-						{{ p_form | crispy}}
+					<div class="col-5">
+						{{ p_form.specialties | as_crispy_field }}
+						{{ p_form.website | as_crispy_field }}
+						{{ p_form.image | as_crispy_field }}
+						{{ p_form.available | as_crispy_field }}
 					</div>
 				</div>
 			</fieldset>

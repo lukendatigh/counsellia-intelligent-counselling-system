@@ -1,0 +1,23 @@
+{% extends 'counsellia/counsellor_subbase.html' %}
+{% load crispy_forms_tags %}
+{% block subcontent %}
+	<div class="shadow content-section">
+		<form method="POST">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">
+					<h1 class="pt-2 pb-3">Book Appointment</h1>
+				</legend>
+				{{ form.description | as_crispy_field }}
+				{{ form.remarks | as_crispy_field }}
+				<div class="row">
+					<div class="col">{{ form.time | as_crispy_field }}</div>
+					<div class="col">{{ form.appointment_type | as_crispy_field }}</div>
+				</div>
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-success" type="submit">Book Appointment</button>
+			</div>
+		</form>
+	</div>
+{% endblock subcontent %}
