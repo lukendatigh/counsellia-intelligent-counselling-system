@@ -45,10 +45,15 @@ class ContactedCounsellorListView(ListView):
 		return Counsellor.objects.filter(counsellees=counsellee).distinct()
 	
 
-class CounsellorProfileView(DetailView):
-	model = Counsellor
-	template_name = 'counsellees/counsellor_profile.html'
-	context_object_name = 'counsellor'
+def counsellor_profile(request, pk):
+	counsellee = request.user.counsellee
+	counsellor = Counsellor.objects.get(pk=pk)
+	appointments = Appointment.objects.filter(
+		counsellor=counsellor).filter(
+		counsellee=counsellee
+		)
+	context = {'counsellor': counsellor, 'appointments': appointments}
+	return render(request, 'counsellees/counsellor_profile.html', context)
 
 
 
