@@ -1,0 +1,26 @@
+{% extends 'counsellia/counsellor_subbase.html' %}
+{% block subcontent %}
+<h1 class="">Past Reports</h1>
+<h6 class="pb-3 text-muted">reports that were run in the past</h6>
+	<a class= "shadow-sm btn btn-success btn-sm px-2 mr-2 px-3 disabled" href="{% url 'reports-past' %}">Past</a>
+	<a class= "shadow-sm btn btn-outline-success btn-sm px-2 mr-2" href="{% url 'reports-archived' %}">Archived</a>
+	<hr>
+	{% if reports %}
+		{% for report in reports %}
+			<article class="shadow-sm media content-section">
+				<div class="media-body mt-1">
+					<h6><img  style="height: 22px; width: 22px;" class="rounded-circle mb-2 mr-1" src="{{ report.counsellee.image.url }}"><a class="mr-2" href="{% url 'selected-counsellee-profile' report.counsellee.id %}">
+					<strong>{{ report.counsellee.user.first_name }} {{ report.counsellee.user.last_name }}</strong></a>on
+					<strong>{{ report.time | date:"F d, Y"}}</strong>
+					</h6>
+					<hr>
+					<h4 class="mt-2"><a class="article-title" href="">{{ report.description }}</a></h4>
+					<a class= "shadow-sm btn btn-outline-success btn-sm mt-3 px-1 mt-3 mr-2 mb-1 px-2" href="">Edit</a>
+					<a class= "shadow-sm btn btn-outline-danger btn-sm mt-3 px-1 mt-3 mr-2 mb-1" href="">Delete</a>
+				</div>
+			</article>
+		{% endfor %}
+	{% else %}
+		<h3>You have not run any reports yet.</h3>
+	{% endif %}
+{% endblock subcontent %}
