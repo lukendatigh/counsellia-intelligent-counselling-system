@@ -13,36 +13,48 @@
 			<title>Counsellia</title>
 		{% endif %}
 	</head>
-	<body class="container">
-		<div class="vertical-center">
-			<div>
-				<h1 class="display-4 mb-5"><strong>Smart counselling for all</strong></h1>
-				<div class="row">
-					<div class="col">
-						<h2 class="text-info"><strong>For Counsellees</strong></h2>
+	<body>
+		<div class="container">
+			<h1 class="display-4 text-center pt-3 mb-5"><strong>Smart Counselling For All</strong></h1>
+			<div class="row mb-5">
+				<div class="col-md-6">
+					<img src="{% static 'images/blackman.jpg' %}" class="img-fluid rounded float-right" style="width:360px; height:240px;">
+				</div>
+				<div class="col-md-6">
+					<div class="">
+						<h3 class="text-success mt-4"><strong>For Counsellors</strong></h3>
 						<h5 class="mb-4">
-						Book appointments with professional counsellors
-						<br>and view details from previous appointments
-						<br>such as reports, remarks and recommendations.<br>
+						Manage appointments with clients.
+						<br>Employ the use of NLP algorithms
+						<br>to perform text analysis on client tweets
+						<br>and aid in decision making.
 						</h5>
 						{% if user.is_authenticated is True %}
-							<a class="btn btn-info btn-sm" href="{% url 'counsellee-appointments-upcoming' %}" role=""><strong>Get Help</strong></a>
+							<a class="btn btn-outline-success btn-sm" href="{% url 'counsellor-appointments-upcoming' %}" role="button"><strong>Help People</strong></a>
 							{% elif user.is_authenticated is False %}
-							<a class="btn btn-info btn-sm" href="{% url 'counsellee-login' %}" role=""><strong>Get Help</strong></a>
+							<a class="btn btn-outline-success btn-sm" href="{% url 'counsellor-login' %}" role="button"><strong>Get Started</strong></a>
 						{% endif %}
 					</div>
-					<div class="col">
-						<h2 class="text-success"><strong>For Counsellors</strong></h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 text-right">
+					<div class="">
+						<h2 class="text-info mt-4"><strong>For Counsellees</strong></h2>
 						<h5 class="mb-4">
-						Manage appointments with clients in one place.
-						<br>Employ the use of NLP algorithms to perform sentiment analysis and aid in decision making.
+						Book appointments with professionals
+						<br>and view details from appointments
+						<br>such asremarks and recommendations.<br>
 						</h5>
 						{% if user.is_authenticated is True %}
-							<a class="btn btn-success btn-sm" href="{% url 'counsellor-profile' %}" role="button"><strong>Help People</strong></a>
+							<a class="btn btn-outline-info btn-sm" href="{% url 'counsellee-appointments-upcoming' %}" role=""><strong>Get Help</strong></a>
 							{% elif user.is_authenticated is False %}
-							<a class="btn btn-success btn-sm" href="{% url 'counsellor-login' %}" role="button"><strong>Help People</strong></a>
+							<a class="btn btn-outline-info btn-sm" href="{% url 'counsellee-login' %}" role=""><strong>Get Started</strong></a>
 						{% endif %}
 					</div>
+				</div>
+				<div class="col-md-6">
+					<img src="{% static 'images/youth.jpg' %}" class="img-fluid rounded float-left" style="width:360px;height:240px;" >
 				</div>
 			</div>
 		</div>

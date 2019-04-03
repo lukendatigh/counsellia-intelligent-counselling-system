@@ -21,9 +21,9 @@
 						{% else %}
 							<p class="article-content">{{ counsellee.bio }}...</p>
 						{% endif %}
-						<a class= "shadow-sm btn btn-outline-success btn-sm" href="">Message</a>
-						<a class= "shadow-sm btn btn-success btn-sm" href="{% url 'counsellor-appointment-create' counsellee.id %}">Book Appointment</a>
-						<a class= "shadow-sm btn btn-success btn-sm" href="">Run Report</a>
+						<!-- <a class= "shadow-sm btn btn-outline-success btn-sm" href="">Message</a> -->
+						<a class= "shadow-sm btn btn-outline-success btn-sm" href="{% url 'counsellor-appointment-create' counsellee.id %}">Book Appointment</a>
+						<a class= "shadow-sm btn btn-success btn-sm" href="{% url 'analyze-twitter' %}">Analyze</a>
 					</div>
 				</article>
 			{% endif %}
