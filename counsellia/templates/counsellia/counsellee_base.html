@@ -36,7 +36,7 @@
 						<div class="navbar-nav">
 							<!---Navbar Right Side--->
 							{% if user.is_authenticated is True %}
-								<a class="nav-item nav-link" href="">Chat</a>
+								<!-- <a class="nav-item nav-link" href="">Chat</a> -->
 								<a class="nav-item nav-link" href="{% url 'counsellee-profile' %}">Profile</a>
 								<a class="nav-item nav-link" href="{% url 'counsellee-logout' %}">Logout</a>
 								{% elif user.is_authenticated is False %}

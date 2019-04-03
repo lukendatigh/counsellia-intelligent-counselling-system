@@ -25,28 +25,10 @@
 					<div class="collapse navbar-collapse" id="navbar">
 						{% if user.is_authenticated is True %}
 							<div class="navbar-nav mr-auto">
-								<a class="nav-item nav-link" href="">Schedule</a>
+								<a class="nav-item nav-link" href="{% url 'counsellor-appointments-upcoming' %}">Schedule</a>
+								<a class="nav-item nav-link" href="{% url 'counsellor-appointments-requests' %}">Appointments</a>
 								<a class="nav-item nav-link" href="{% url 'counsellor-counsellee-list' %}">Counsellees</a>
-								<li class="nav-item dropdown">
-									<a class="nav-link" href="#" id="appointmentDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Appointments
-									</a>
-									<div class="dropdown-menu" aria-labelledby="appointmentDropdownMenuLink">
-										<a class="dropdown-item" href="#">Requests</a>
-										<a class="dropdown-item" href="#">Held</a>
-										<a class="dropdown-item" href="#">Archived</a>
-									</div>
-								</li>
-								<li class="nav-item dropdown">
-									<a class="nav-link" href="#" id="reportDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Reports
-									</a>
-									<div class="dropdown-menu" aria-labelledby="reportDropdownMenuLink">
-										<a class="dropdown-item" href="#">Past</a>
-										<a class="dropdown-item" href="">Archived</a>
-									</div>
-								</li>
-								
+								<a class="nav-item nav-link" href="{% url 'analyze-twitter' %}">Analyze</a>
 							</div>
 							{% elif user.is_authenticated is False %}
 							<div class="navbar-nav mr-auto">
@@ -55,7 +37,7 @@
 						<div class="navbar-nav">
 							<!---Navbar Right Side--->
 							{% if user.is_authenticated is True %}
-								<a class="nav-item nav-link" href="">Chat</a>
+								<!-- <a class="nav-item nav-link" href="">Chat</a> -->
 								<a class="nav-item nav-link" href="{% url 'counsellor-profile' %}">Profile</a>
 								<a class="nav-item nav-link" href="{% url 'counsellor-logout' %}">Logout</a>
 								{% elif user.is_authenticated is False %}
@@ -68,6 +50,7 @@
 		</header>
 		<main role="main" class="container">
 			{% block maincontent %}
+			
 			{% endblock maincontent %}
 			
 		</main>
@@ -75,5 +58,6 @@
 		<script type="text/javascript" src="{% static 'js/jquery-slim.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/holder.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
 	</body>
 </html>

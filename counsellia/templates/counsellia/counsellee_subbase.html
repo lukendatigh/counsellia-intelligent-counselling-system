@@ -4,8 +4,11 @@
 		<div class="col-md-8 order">
 			{% if messages %}
 				{% for message in messages %}
-					<div class="alert alert-{{ message.tags }}">
+					<div class="alert alert-{{ message.tags }} alert-dismissable fade show">
 						{{ message }}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
 				{% endfor %}
 			{% endif %}
@@ -13,16 +16,19 @@
 			{% endblock subcontent %}
 		</div>
 		<div class="col-md-4">
+		{% block sidecontent %}
+		{% endblock sidecontent %}
+		<!-- 
 			<div class="content-section">
 				<h3 class="pt-2">Notifications</h3>
 				<hr>
-				{% if appointments_count > 1 %}
-					<h6>Upcoming Appointments <a href="" class="badge badge-pill badge-primary">{{ appointments_count }}</a></h6>
+				{% if upcoming_appointments %}
+					<h6>Upcoming Appointments <a href="" class="badge badge-pill badge-primary">{{ upcoming_appointments.count }}</a></h6>
 				{% else %}
 					<h6>Upcoming Appointments <a href="" class="badge badge-pill badge-primary">None</a></h6>
 				{% endif %}
 				<h6>Messages <a href="" class="badge badge-pill badge-primary">None</a></h6>
-			</div>
+			</div> -->
 		</div>
 	</div>
 {% endblock maincontent %}
