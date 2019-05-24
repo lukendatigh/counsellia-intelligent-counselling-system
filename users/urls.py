@@ -7,7 +7,7 @@ urlpatterns = [
 	path('', users_views.index, name = 'index-page'),
 	path('counsellee/', include('counsellees.urls')),
 	path('counsellor/', include('counsellors.urls')),
-
+	
 	# Login view
 	path('counsellee-login/', auth_views.LoginView.as_view(template_name = 'users/counsellee_login.html'), 
 		name = 'counsellee-login'),

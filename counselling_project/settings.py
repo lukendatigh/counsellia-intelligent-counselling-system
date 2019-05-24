@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
-    # 'chat.apps.ChatConfig',
+    'chat.apps.ChatConfig',
     'analysis.apps.AnalysisConfig',
     'counsellia.apps.CounselliaConfig',
     'counsellees.apps.CounselleesConfig',
@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'select2',
-    'django_select2'
+    'django_select2',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

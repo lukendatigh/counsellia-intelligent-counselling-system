@@ -1,0 +1,9 @@
+from random import seed
+# from random import random
+from random import randint
+
+dice_sides = 6
+for _ in range(10):
+    random_dice_1 = randint(1, dice_sides)
+    random_dice_2 = randint(1, dice_sides)
+    print(str(random_dice_1) + ', ' + str(random_dice_2))

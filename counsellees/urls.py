@@ -7,7 +7,6 @@ from . views import (
 	AppointmentDeleteView,
 	CounsellorListView,
 	ContactedCounsellorListView,
-	CounsellorProfileView,
 	AppointmentsUpcomingView,
 	AppointmentsRequestedView,
 	AppointmentsHeldView,
@@ -19,6 +18,8 @@ urlpatterns = [
 	
 	# user's profile
 	path('profile/', counsellee_views.profile_update, name = 'counsellee-profile'),
+	# chat
+	path('chat/', include('chat.urls')),
 
 
 	# notifications
@@ -60,8 +61,10 @@ urlpatterns = [
 		name = 'available-counsellors'),
 	path('counsellors/contacted/', ContactedCounsellorListView.as_view(),
 		name = 'contacted-counsellors'),
-	path('counsellor/<int:pk>/', CounsellorProfileView.as_view(),
+	path('counsellor/<int:pk>/', counsellee_views.counsellor_profile,
 		name = 'selected-counsellor-profile'),
+	# path('counsellor/<int:pk>/', CounsellorProfileView.as_view(),
+	# 	name = 'selected-counsellor-profile'),
 	# path('counsellor/<str:username>/profile/', CounsellorProfileView.as_view(),
 	# 	name = 'selected-counsellor-profile'),
 

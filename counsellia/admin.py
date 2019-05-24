@@ -1,6 +1,5 @@
 from django.contrib import admin
 from . models import Appointment
-from users.models import Category
 
 # Register your models here.
 
