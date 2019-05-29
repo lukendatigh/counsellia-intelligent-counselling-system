@@ -1,8 +1,8 @@
 def fetch(twitter_handle):
-	consumer_key = 'sTHuqr1R1bMveD8kg9pAX0PyY'
-	consumer_secret = 'QnKOUUO1EVJ9VvBJx7Y2hAiSMhvRjuupW0z7TaLtH24j6Q2uQV'
-	access_token = '2266614999-qHbyiV47jSPycclUivzqLfIK8fSJ0YVhrjW2ui2'
-	access_token_secret = 'FJFo35DNr53A13L23W899hxUWYGPHov3go5FiWqOVgqqz'
+	consumer_key = ''
+	consumer_secret = ''
+	access_token = ''
+	access_token_secret = ''
 	import tweepy
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
